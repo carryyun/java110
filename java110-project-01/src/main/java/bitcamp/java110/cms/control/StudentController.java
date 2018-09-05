@@ -1,8 +1,13 @@
+package bitcamp.java110.cms.control;
+
 import java.util.Scanner;
 
+import bitcamp.java110.cms.domain.Member;
+
 public class StudentController {
+    private static Student[] students = new Student[100];
+    private static int studentIndex = 0; //Student
     static Scanner keyIn;
-    
     
     static class Student extends Member{
         protected String school;
@@ -27,10 +32,9 @@ public class StudentController {
             this.tel = tel;
         }
     }
-    static Student[] students = new Student[100];
-    static int studentIndex = 0; //Student
+
     
-    static void serviceStudentMenu() {
+    private static void serviceStudentMenu() {
         while(true) {
             System.out.println("학생 관리> ");
             String command = keyIn.nextLine();
@@ -45,7 +49,7 @@ public class StudentController {
             }
         }
     }
-    static void inputStudents() {
+    private static void inputStudents() {
         while (true) {
             Student s = new Student();
             
@@ -75,7 +79,7 @@ public class StudentController {
                 break;
         }
     }
-    static void printStudents() {
+    private static void printStudents() {
         int count=0;
         for (Student s : students) {
             if(count++ == studentIndex)

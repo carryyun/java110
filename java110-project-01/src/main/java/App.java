@@ -1,13 +1,16 @@
 import java.util.Scanner;
 
-public class App {
+import bitcamp.java110.cms.control.ManagerController;
+import bitcamp.java110.cms.control.StudentController;
+import bitcamp.java110.cms.control.TeacherController;
 
-    
+public class App {
     static Scanner keyIn = new Scanner(System.in);
 
     public static void main(String[] args) {
         StudentController.keyIn=keyIn;
         TeacherController.keyIn=keyIn;
+        ManagerController.keyIn=keyIn;
         while(true) {
             String menu = promptMenu();
 
