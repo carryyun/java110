@@ -6,7 +6,7 @@ import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.util.ArrayList;
 
 public class ManagerController {
-    private ArrayList managers = new ArrayList();
+    private ArrayList<Manager> managers = new ArrayList<>();
     public Scanner keyIn;
     
     public ManagerController(Scanner keyIn) {
@@ -38,7 +38,7 @@ public class ManagerController {
         for (int i=0;i<managers.size();i++) {
             if(count++ == managers.size())
                 break;
-            Manager s= (Manager) managers.get(i);
+            Manager s= managers.get(i);
             System.out.printf("%s, %s, %s %s %b %s\n", 
                     s.getName(), 
                     s.getEmail(), 
@@ -94,7 +94,7 @@ public class ManagerController {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Manager s=(Manager) managers.get(no);
+        Manager s= managers.get(no);
         System.out.printf("이름: %s\n",s.getName());
         System.out.printf("이메일: %s\n",s.getEmail());
         System.out.printf("암호: %s\n",s.getPassword());
