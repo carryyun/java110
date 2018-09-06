@@ -3,15 +3,16 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
-import bitcamp.java110.cms.util.ArrayList;
-import bitcamp.java110.cms.util.LinkedList;
+import bitcamp.java110.cms.util.List;
 
 public class StudentController {
-    private LinkedList<Student> students = new LinkedList<>();
+    private List<Student> students;
     public Scanner keyIn;
     
-    public StudentController(Scanner keyIn) {
+    public StudentController(Scanner keyIn, List<Student> students) {
         this.keyIn=keyIn;
+        this.students=students;
+        init();
     }
     
     public void serviceStudentMenu() {
@@ -119,7 +120,7 @@ public class StudentController {
     }
     
     //인스턴스블록 생성자가 실행되기전에 먼저실행됨 static 블록과 비슷한역할
-    {
+    private void init(){
         Student s=new Student();
         s.setName("1");
         students.add(s);
