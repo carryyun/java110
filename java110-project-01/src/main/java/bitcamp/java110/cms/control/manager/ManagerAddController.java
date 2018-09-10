@@ -1,11 +1,11 @@
 package bitcamp.java110.cms.control.manager;
 
 import java.util.Scanner;
+
 import bitcamp.java110.cms.App;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.domain.Student;
 
 @Component
 public class ManagerAddController {
@@ -33,7 +33,11 @@ public class ManagerAddController {
             System.out.print("직위? ");
             m.setPosition(keyIn.nextLine());
             
-            App.managers.add(m);
+            if(App.managerDao.insert(m)>0)
+                System.out.println("저장하였습니다");
+            else
+                System.out.println("같은 이메일의 학생이 존재합니다.");
+            
             
             System.out.print("계속 하시겠습니까?(Y/n) ");
             String answer = keyIn.nextLine();
@@ -45,23 +49,28 @@ public class ManagerAddController {
     private void init() {
         Manager s = new Manager();
         s.setName("a");
-        App.managers.add(s);
+        s.setEmail("a@test.com");
+        App.managerDao.insert(s);
         
         s = new Manager();
         s.setName("b");
-        App.managers.add(s);
+        s.setEmail("b@test.com");
+        App.managerDao.insert(s);
         
         s = new Manager();
         s.setName("c");
-        App.managers.add(s);
+        s.setEmail("c@test.com");
+        App.managerDao.insert(s);
         
         s = new Manager();
         s.setName("d");
-        App.managers.add(s);
+        s.setEmail("d@test.com");
+        App.managerDao.insert(s);
         
         s = new Manager();
         s.setName("e");
-        App.managers.add(s);
+        s.setEmail("e@test.com");
+        App.managerDao.insert(s);
     }
     
 }
