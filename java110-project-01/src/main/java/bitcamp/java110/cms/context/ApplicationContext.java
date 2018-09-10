@@ -2,7 +2,6 @@ package bitcamp.java110.cms.context;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import org.apache.ibatis.io.Resources;
@@ -27,7 +26,6 @@ public class ApplicationContext {
     
     // objPool에 보관된 객체를 이름으로 찾아 리턴한다.
     public Object getBean(String name) {
-        // objPool에서 주어진 이름의 객체를 찾아 리턴한다.
         return objPool.get(name);
     }
     
@@ -74,3 +72,14 @@ public class ApplicationContext {
     
     
 }
+
+
+
+
+
+
+
+
+
+
+

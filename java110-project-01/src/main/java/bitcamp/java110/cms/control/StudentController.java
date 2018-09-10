@@ -1,31 +1,35 @@
 package bitcamp.java110.cms.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.Component;
+import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.domain.Student;
-import bitcamp.java110.cms.util.LinkedList;
 
+@Component("student")
 public class StudentController {
 
-    private LinkedList<Student> students = new LinkedList<>();
-    public Scanner keyIn;
+    private List<Student> students = new ArrayList<>();
     
-    public StudentController(Scanner keyIn) {
-        this.keyIn = keyIn;
+    public StudentController() {
+        init();
     }
     
-    public void serviceStudentMenu() {
+    @RequestMapping
+    public void student(Scanner keyIn) {
         while (true) {
             System.out.print("학생 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printStudents();
             } else if (command.equals("add")) {
-                inputStudents();
+                inputStudents(keyIn);
             } else if (command.equals("delete")) {
-                deleteStudent();
+                deleteStudent(keyIn);
             } else if (command.equals("detail")) {
-                detailStudent();
+                detailStudent(keyIn);
             } else if (command.equals("quit")) {
                 break;
             } else {
@@ -48,7 +52,7 @@ public class StudentController {
         }
     }
     
-    private void inputStudents() {
+    private void inputStudents(Scanner keyIn) {
         while (true) {
             Student m = new Student();
             
@@ -79,7 +83,7 @@ public class StudentController {
         }
     }
 
-    private void deleteStudent() {
+    private void deleteStudent(Scanner keyIn) {
         System.out.print("삭제할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -93,7 +97,7 @@ public class StudentController {
         System.out.println("삭제하였습니다.");
     }
     
-    private void detailStudent() {
+    private void detailStudent(Scanner keyIn) {
         System.out.print("조회할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -112,7 +116,7 @@ public class StudentController {
         System.out.printf("재직여부: %b\n", student.isWorking());
     }
     
-    { // 인스턴스 블록
+    private void init() {
         Student s = new Student();
         s.setName("a");
         students.add(s);

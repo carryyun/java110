@@ -1,31 +1,31 @@
 package bitcamp.java110.cms.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.Component;
+import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.domain.Teacher;
-import bitcamp.java110.cms.util.LinkedList;
 
+@Component("teacher")
 public class TeacherController {
     
-    private LinkedList<Teacher> teachers = new LinkedList<>();
-    public Scanner keyIn;
+    private List<Teacher> teachers = new ArrayList<>();
     
-    public TeacherController(Scanner keyIn) {
-        this.keyIn = keyIn;
-    }
-    
-    public void serviceTeacherMenu() {
+    @RequestMapping
+    public void teacher(Scanner keyIn) {
         while (true) {
             System.out.print("강사 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printTeachers();
             } else if (command.equals("add")) {
-                inputTeachers();
+                inputTeachers(keyIn);
             } else if (command.equals("delete")) {
-                deleteTeacher();
+                deleteTeacher(keyIn);
             } else if (command.equals("detail")) {
-                detailTeacher();
+                detailTeacher(keyIn);
             } else if (command.equals("quit")) {
                 break;
             } else {
@@ -48,7 +48,7 @@ public class TeacherController {
         }
     }
     
-    private void inputTeachers() {
+    private void inputTeachers(Scanner keyIn) {
         while (true) {
             Teacher m = new Teacher();
             
@@ -79,7 +79,7 @@ public class TeacherController {
         }
     }
     
-    private void deleteTeacher() {
+    private void deleteTeacher(Scanner keyIn) {
         System.out.print("삭제할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -93,7 +93,7 @@ public class TeacherController {
         System.out.println("삭제하였습니다.");
     }
     
-    private void detailTeacher() {
+    private void detailTeacher(Scanner keyIn) {
         System.out.print("조회할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         

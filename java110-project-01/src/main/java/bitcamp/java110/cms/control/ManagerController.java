@@ -1,31 +1,33 @@
 package bitcamp.java110.cms.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.java110.cms.annotation.Component;
+import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.util.LinkedList;
 
-public class ManagerController {
+@Component("manager")
+public class ManagerController { 
 
-    private LinkedList<Manager> managers = new LinkedList<>();
-    public Scanner keyIn;
+    private List<Manager> managers = new ArrayList<>();
     
-    public ManagerController(Scanner keyIn) {
-        this.keyIn = keyIn;
-    }
+    //public ManagerController() {}
     
-    public void serviceManagerMenu() {
+    @RequestMapping
+    public void manager(Scanner keyIn) {
         while (true) {
             System.out.print("매니저 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printManagers();
             } else if (command.equals("add")) {
-                inputManagers();
+                inputManagers(keyIn);
             } else if (command.equals("delete")) {
-                deleteManager();
+                deleteManager(keyIn);
             } else if (command.equals("detail")) {
-                detailManager();
+                detailManager(keyIn);
             } else if (command.equals("quit")) {
                 break;
             } else {
@@ -47,7 +49,7 @@ public class ManagerController {
         }
     }
     
-    private void inputManagers() {
+    private void inputManagers(Scanner keyIn) {
         while (true) {
             Manager m = new Manager();
             
@@ -75,7 +77,7 @@ public class ManagerController {
         }
     }
     
-    private void deleteManager() {
+    private void deleteManager(Scanner keyIn) {
         System.out.print("삭제할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -89,7 +91,7 @@ public class ManagerController {
         System.out.println("삭제하였습니다.");
     }
     
-    private void detailManager() {
+    private void detailManager(Scanner keyIn) {
         System.out.print("조회할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
