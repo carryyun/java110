@@ -1,20 +1,25 @@
-import java.lang.reflect.Method;
+package bitcamp.java110.cms;
 import java.util.Scanner;
 
-import bitcamp.java110.cms.annotation.RequestMapping;
 import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
+import bitcamp.java110.cms.dao.StudentDao;
+import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.domain.Teacher;
+import bitcamp.java110.cms.util.ArrayList;
 
 public class App {
-    
+    public static StudentDao studentDao=new StudentDao();    
+    public static ArrayList<Manager> managers=new ArrayList<>();    
+    public static ArrayList<Teacher> teachers=new ArrayList<>();    
     static Scanner keyIn = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
         
         ApplicationContext iocContainer = 
                 new ApplicationContext("bitcamp.java110.cms.control");
-        
+
         RequestMappingHandlerMapping requestHandlerMap= new RequestMappingHandlerMapping();
         
         // => IoC 컨테이너에 보관된 객체의 이름 목록을 가져온다.

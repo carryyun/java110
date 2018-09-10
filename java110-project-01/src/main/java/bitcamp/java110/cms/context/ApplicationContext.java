@@ -66,9 +66,15 @@ public class ApplicationContext {
                     
                     //System.out.println(clazz.getName() + "==> " + name);
                     
-                    // => Component 애노테이션 value 값으로 인스턴스를 objPool에 저장한다.
-                    objPool.put(anno.value(), instance);
-                    
+                    // => Component 애노테이션이 value 값이 있으면 그 값으로 객체를 저장
+                    //    없으면, 클래스 이름으로 객체를 저장한다.
+                    if (anno.value().length() > 0) {
+                        // => Component 애노테이션 value 값으로 인스턴스를 objPool에 저장한다.
+                        objPool.put(anno.value(), instance);
+                    } else {
+                        objPool.put(clazz.getName(), instance);
+                    }
+                     
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.printf("%s 클래스는 기본 생성자가 없습니다.", 
