@@ -3,6 +3,7 @@ package bitcamp.java110.cms.context;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.apache.ibatis.io.Resources;
 
@@ -27,6 +28,13 @@ public class ApplicationContext {
     // objPool에 보관된 객체를 이름으로 찾아 리턴한다.
     public Object getBean(String name) {
         return objPool.get(name);
+    }
+    
+    public String[] getBeanDefinitionNames() {
+        Set<String> keySet= objPool.keySet();
+        String[] names = new String[keySet.size()];
+        keySet.toArray(names);
+        return names;
     }
     
     private void findClass(File path, String packagePath) throws Exception {
