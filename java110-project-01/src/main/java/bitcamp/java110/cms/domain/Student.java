@@ -1,9 +1,10 @@
 package bitcamp.java110.cms.domain;
 
-public class Student extends Member{
+public class Student extends Member {
     protected String school;
     protected boolean working;
     protected String tel;
+    
     public String getSchool() {
         return school;
     }

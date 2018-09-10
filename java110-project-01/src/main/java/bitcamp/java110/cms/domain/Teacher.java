@@ -1,9 +1,10 @@
 package bitcamp.java110.cms.domain;
 
-public class Teacher extends Member{
+public class Teacher extends Member {
     protected String tel;
     protected int pay;
-    protected String subject;
+    protected String subjects;
+    
     public String getTel() {
         return tel;
     }
@@ -16,10 +17,10 @@ public class Teacher extends Member{
     public void setPay(int pay) {
         this.pay = pay;
     }
-    public String getSubject() {
-        return subject;
+    public String getSubjects() {
+        return subjects;
     }
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setSubjects(String subjects) {
+        this.subjects = subjects;
     }
 }

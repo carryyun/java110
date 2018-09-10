@@ -1,71 +1,72 @@
 package bitcamp.java110.cms.control;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.util.LinkedList;
 
-public class ManagerController implements Controller{
-    
-    public String name="3";
-    
-    private List<Manager> managers=new ArrayList<>();
+public class ManagerController {
 
-    public void service(Scanner keyIn) {
-        while(true) {
-            System.out.println("매니저 관리> ");
+    private LinkedList<Manager> managers = new LinkedList<>();
+    public Scanner keyIn;
+    
+    public ManagerController(Scanner keyIn) {
+        this.keyIn = keyIn;
+    }
+    
+    public void serviceManagerMenu() {
+        while (true) {
+            System.out.print("매니저 관리> ");
             String command = keyIn.nextLine();
-            if(command.equals("list")) {
+            if (command.equals("list")) {
                 printManagers();
-            }else if (command.equals("add")) {
-                inputManagers(keyIn);
-            }else if (command.equals("delete")) {
-                deleteManager(keyIn);
-            }else if (command.equals("detail")) {
-                detailManager(keyIn);
-            }else if (command.equals("quit")) {
+            } else if (command.equals("add")) {
+                inputManagers();
+            } else if (command.equals("delete")) {
+                deleteManager();
+            } else if (command.equals("detail")) {
+                detailManager();
+            } else if (command.equals("quit")) {
                 break;
-            }else {
+            } else {
                 System.out.println("유효하지 않는 명령입니다.");
             }
         }
     }
     
     private void printManagers() {
-        int count=0;
-        for (int i=0;i<managers.size();i++) {
-            if(count++ == managers.size())
-                break;
-            Manager s= managers.get(i);
-            System.out.printf("%s, %s, %s %s %b %s\n", 
+        for (int i = 0; i < managers.size(); i++) {
+            Manager s = managers.get(i);
+            System.out.printf("%d: %s, %s, %s, %s, %s\n",
+                    i,
                     s.getName(), 
                     s.getEmail(), 
-                    s.getPassword(),
+                    s.getPassword(), 
                     s.getTel(),
                     s.getPosition());
         }
     }
-    private void inputManagers(Scanner keyIn) {
+    
+    private void inputManagers() {
         while (true) {
-            Manager s = new Manager();
+            Manager m = new Manager();
             
             System.out.print("이름? ");
-            s.setName(keyIn.nextLine());
+            m.setName(keyIn.nextLine());
             
             System.out.print("이메일? ");
-            s.setEmail(keyIn.nextLine());
+            m.setEmail(keyIn.nextLine());
             
             System.out.print("암호? ");
-            s.setPassword(keyIn.nextLine());
+            m.setPassword(keyIn.nextLine());
             
             System.out.print("전화? ");
-            s.setTel(keyIn.nextLine());
+            m.setTel(keyIn.nextLine());
             
-            System.out.print("position? ");
-            s.setPosition(keyIn.nextLine());
+            System.out.print("직위? ");
+            m.setPosition(keyIn.nextLine());
             
-            managers.add(s);
+            managers.add(m);
             
             System.out.print("계속 하시겠습니까?(Y/n) ");
             String answer = keyIn.nextLine();
@@ -74,31 +75,35 @@ public class ManagerController implements Controller{
         }
     }
     
-    private void deleteManager(Scanner keyIn) {
-        System.out.print("삭제할 번호?");
-        int no= Integer.parseInt(keyIn.nextLine());
-        if(no<0 || no >= managers.size()) {
+    private void deleteManager() {
+        System.out.print("삭제할 번호? ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        
+        if (no < 0 || no >= managers.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
+        
         managers.remove(no);
         
         System.out.println("삭제하였습니다.");
-        
     }
-    private void detailManager(Scanner keyIn) {
-        System.out.print("조회할 번호?");
-        int no= Integer.parseInt(keyIn.nextLine());
-        if(no<0 || no >= managers.size()) {
+    
+    private void detailManager() {
+        System.out.print("조회할 번호? ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        
+        if (no < 0 || no >= managers.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Manager s= managers.get(no);
-        System.out.printf("이름: %s\n",s.getName());
-        System.out.printf("이메일: %s\n",s.getEmail());
-        System.out.printf("암호: %s\n",s.getPassword());
-        System.out.printf("전화: %s\n",s.getTel());
-        System.out.printf("Position: %b\n",s.getPosition());
         
+        Manager m = managers.get(no);
+        
+        System.out.printf("이름: %s\n", m.getName());
+        System.out.printf("이메일: %s\n", m.getEmail());
+        System.out.printf("암호: %s\n", m.getPassword());
+        System.out.printf("직위: %s\n", m.getPosition());
+        System.out.printf("전화: %s\n", m.getTel());
     }
 }
