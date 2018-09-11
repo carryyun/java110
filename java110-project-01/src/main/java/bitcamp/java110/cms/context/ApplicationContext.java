@@ -33,13 +33,8 @@ public class ApplicationContext {
         // 클래스에 대해 인스턴스를 생성하여 objPool에 보관한다.
         createInstance();
         
-        // injectDependency() 메서드를 외부 클래스로 분리한 다음에
-        // 그 객체를 실행한다.
-        AutowiredAnnotationBeanPostProcessor processor = 
-                new AutowiredAnnotationBeanPostProcessor();
-        processor.postProcess(this);
-        
         // 객체 생성 후 작업을 수행하는 클래스가 있다면 찾아서 호출한다.
+        callBeanPostProcessor();
     }
     
     // objPool에 보관된 객체를 이름으로 찾아 리턴한다.
@@ -120,26 +115,22 @@ public class ApplicationContext {
             }
         }
     }
-    
-    private void injectDependency() {
+  
+    private void callBeanPostProcessor() {
         
+        Collection<Object> objList = objPool.values();
+        
+        // => objPool에 보관된 객체 중에서 BeanPostProcessor 규칙을
+        // => 준수하는 개체를 찾는다.
+        for(Object obj : objList) {
+            if(!BeanPostProcessor.class.isInstance(obj)) continue; // BeanPostProcessor 인터페이스를 상속받아 생성된 객체인지 묻는것
+            
+            BeanPostProcessor processor = (BeanPostProcessor)obj;
+            
+            processor.postProcess(this);
+        }
+                
     }
-    
-//    private void callBeanPostProcessor() {
-//        
-//        Collection<Object> objList = objPool.values();
-//        
-//        // => objPool에 보관된 객체 중에서 BeanPostProcessor 규칙을
-//        // => 준수하는 개체를 찾는다.
-//        for(Object obj : objList) {
-//            if(!BeanPostProcessor.class.isInstance(obj)) continue; // BeanPostProcessor 인터페이스를 상속받아 생성된 객체인지 묻는것
-//            
-//            BeanPostProcessor processor = (BeanPostProcessor)obj;
-//            
-//            processor.postProcess(this);
-//        }
-//                
-//    }
 
     
     

@@ -2,9 +2,12 @@ package bitcamp.java110.cms.context;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
-import bitcamp.java110.cms.annotation.Autowired;
 
-public class AutowiredAnnotationBeanPostProcessor{
+import bitcamp.java110.cms.annotation.Autowired;
+import bitcamp.java110.cms.annotation.Component;
+
+@Component
+public class AutowiredAnnotationBeanPostProcessor implements BeanPostProcessor{
     ApplicationContext beanContainer;
     
     public void postProcess(ApplicationContext beanContainer) {
