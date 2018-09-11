@@ -4,26 +4,22 @@ import java.util.Scanner;
 import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
-import bitcamp.java110.cms.dao.ManagerDao;
-import bitcamp.java110.cms.dao.StudentDao;
-import bitcamp.java110.cms.dao.TeacherDao;
 
 public class App {
-    public static StudentDao studentDao=new StudentDao();    
-    public static ManagerDao managerDao=new ManagerDao();    
-    public static TeacherDao teacherDao=new TeacherDao();    
+    
     static Scanner keyIn = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
         
         ApplicationContext iocContainer = 
-                new ApplicationContext("bitcamp.java110.cms.control");
-
-        RequestMappingHandlerMapping requestHandlerMap= new RequestMappingHandlerMapping();
+                new ApplicationContext("bitcamp.java110.cms");
+        
+        RequestMappingHandlerMapping requestHandlerMap = 
+                new RequestMappingHandlerMapping();
         
         // => IoC 컨테이너에 보관된 객체의 이름 목록을 가져온다.
-        String[] names=iocContainer.getBeanDefinitionNames();
-        for(String name:names) {
+        String[] names = iocContainer.getBeanDefinitionNames();
+        for (String name : names) {
             // => 이름으로 객체를 꺼낸다.
             Object obj = iocContainer.getBean(name);
             
@@ -37,6 +33,7 @@ public class App {
                 System.out.println("안녕히 가세요!");
                 break;
             } 
+            
             RequestMappingHandler mapping = requestHandlerMap.getMapping(menu);
             if (mapping == null) {
                 System.out.println("해당 메뉴가 없습니다.");

@@ -3,15 +3,16 @@ package bitcamp.java110.cms.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Manager;
 
+@Component
 public class ManagerDao {
-    
     private List<Manager> list = new ArrayList<>();
     
     public int insert(Manager manager) {
-        for(Manager item : list) {
-            if( item.getEmail().equals((manager.getEmail()))){
+        for (Manager item : list) {
+            if (item.getEmail().equals(manager.getEmail())) {
                 return 0;
             }
         }
@@ -24,18 +25,17 @@ public class ManagerDao {
     }
     
     public Manager findByEmail(String email) {
-        for(Manager item : list) {
-            if( item.getEmail().equals(email) ){
+        for (Manager item : list) {
+            if (item.getEmail().equals(email)) {
                 return item;
             }
         }
-        
         return null;
     }
     
     public int delete(String email) {
-        for(Manager item : list) {
-            if( item.getEmail().equals(email) ){
+        for (Manager item : list) {
+            if (item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;
             }

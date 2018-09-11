@@ -2,17 +2,22 @@ package bitcamp.java110.cms.control.manager;
 
 import java.util.Scanner;
 
-import bitcamp.java110.cms.App;
+import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
+import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 
 @Component
-public class ManagerAddController {
-    
-    public ManagerAddController() {
-        init();
+public class ManagerAddController { 
+
+    ManagerDao managerDao;
+  
+    @Autowired
+    public void setManagerDao(ManagerDao managerDao) {
+        this.managerDao = managerDao;
     }
+    
     @RequestMapping("manager/add")
     public void add(Scanner keyIn) {
         while (true) {
@@ -33,44 +38,17 @@ public class ManagerAddController {
             System.out.print("직위? ");
             m.setPosition(keyIn.nextLine());
             
-            if(App.managerDao.insert(m)>0)
-                System.out.println("저장하였습니다");
-            else
-                System.out.println("같은 이메일의 학생이 존재합니다.");
-            
+            if (managerDao.insert(m) > 0) {
+                System.out.println("저장하였습니다.");
+            } else {
+                System.out.println("같은 이메일의 매니저가 존재합니다.");
+            }
             
             System.out.print("계속 하시겠습니까?(Y/n) ");
             String answer = keyIn.nextLine();
             if (answer.toLowerCase().equals("n"))
                 break;
         }
-    }
-    
-    private void init() {
-        Manager s = new Manager();
-        s.setName("a");
-        s.setEmail("a@test.com");
-        App.managerDao.insert(s);
-        
-        s = new Manager();
-        s.setName("b");
-        s.setEmail("b@test.com");
-        App.managerDao.insert(s);
-        
-        s = new Manager();
-        s.setName("c");
-        s.setEmail("c@test.com");
-        App.managerDao.insert(s);
-        
-        s = new Manager();
-        s.setName("d");
-        s.setEmail("d@test.com");
-        App.managerDao.insert(s);
-        
-        s = new Manager();
-        s.setName("e");
-        s.setEmail("e@test.com");
-        App.managerDao.insert(s);
     }
     
 }
