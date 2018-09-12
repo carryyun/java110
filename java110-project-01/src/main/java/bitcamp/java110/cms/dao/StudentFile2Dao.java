@@ -1,63 +1,48 @@
 package bitcamp.java110.cms.dao;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Student;
 
-//@Component
-public class StudentFileDao implements StudentDao{
-
+@Component
+public class StudentFile2Dao implements StudentDao{
+    static String defaultfilename="data/student2.dat";
+    String filename;
     private List<Student> list = new ArrayList<>();
 
-    public StudentFileDao() {
-        File dataFile = new File("data/student.dat");
+    @SuppressWarnings("unchecked")
+    public StudentFile2Dao(String filename) {
+        this.filename=filename;
         //try autocloseable 메소드가 있는 인터페이스라면 try뒤 ( )에 내용을 넣으면 finally에서 닫아주지않아도 명령실행 후 자동으로 close된다.
-        try(BufferedReader in = new BufferedReader(new FileReader(dataFile))){
-            while(true) {
-                String line = in.readLine();
-                if (line == null) break;
-                
-                String[] values = line.split(",");
-                Student s = new Student();
-                s.setEmail(values[0]);
-                s.setName(values[1]);
-                s.setPassword(values[2]);
-                s.setSchool(values[3]);
-                s.setTel(values[4]);
-                s.setWorking(Boolean.parseBoolean(values[5]));
-                
-                list.add(s);
-            }
+        try(
+                FileInputStream in0 = new FileInputStream(filename);
+                ObjectInputStream in = new ObjectInputStream(in0);
+                ){  
+            list = (List<Student>) in.readObject();
 
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
-    
+
+    public StudentFile2Dao() {
+        this(defaultfilename);
+    }
+
     private void save() {
-        File dataFile = new File("data/student.dat");
         try (
-            BufferedWriter out = 
-                new BufferedWriter(new FileWriter(dataFile))
-        ){
-            for (Student s : list) {
-                out.write(
-                    String.format("%s,%s,%s,%s,%s,%b\n", 
-                        s.getEmail(),
-                        s.getName(),
-                        s.getPassword(),
-                        s.getSchool(),
-                        s.getTel(),
-                        s.isWorking()));
-            }
+                FileOutputStream out0 = new FileOutputStream(filename);
+                BufferedOutputStream out1 = new BufferedOutputStream(out0);
+                ObjectOutputStream out = new ObjectOutputStream(out1);
+                ){
+            out.writeObject(list);
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();

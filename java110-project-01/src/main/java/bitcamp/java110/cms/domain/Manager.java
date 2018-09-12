@@ -2,8 +2,8 @@ package bitcamp.java110.cms.domain;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Manager extends Member implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected String position;
     protected String tel;
 
