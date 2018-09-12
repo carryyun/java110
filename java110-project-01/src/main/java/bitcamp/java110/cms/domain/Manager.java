@@ -1,6 +1,9 @@
 package bitcamp.java110.cms.domain;
 
-public class Manager extends Member {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Manager extends Member implements Serializable {
     protected String position;
     protected String tel;
 
