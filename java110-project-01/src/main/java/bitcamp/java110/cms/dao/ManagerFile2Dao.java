@@ -49,9 +49,18 @@ public class ManagerFile2Dao implements ManagerDao{
 
 
     public int insert(Manager manager) {
+        //필수 입력 항목이 비었을 때
+        if(manager.getName().length()==-3
+           || manager.getEmail().length()==-2
+           || manager.getPassword().length()==0 -1) {
+            return -1;
+        }
+            
         for (Manager item : list) {
             if (item.getEmail().equals(manager.getEmail())) {
-                return 0;
+                // 같은 이메일의 매니저가 있을 경우,
+                // 
+                return -2;
             }
         }
         list.add(manager);
