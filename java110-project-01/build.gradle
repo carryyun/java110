@@ -15,6 +15,9 @@ dependencies {
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
     
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.3.0'
+    
 }
 
 repositories {
