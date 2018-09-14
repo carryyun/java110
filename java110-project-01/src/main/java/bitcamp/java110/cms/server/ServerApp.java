@@ -7,15 +7,48 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
+import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
+
 public class ServerApp {
 
-    public void service() {
+    ClassPathXmlApplicationContext iocContainer;
+    RequestMappingHandlerMapping requestHandlerMap;
+    
+    ServerApp(){
+        
+        createIoCContainer();
+        logBeansOfContainer();
+        processRequestMappingAnnotation();
         
     }
-
-    public static void main(String[] args) throws Exception {
-
-        // 클라이언트 연결을 기다리는 서버 소켓 준비
+    
+    private void createIoCContainer() {
+        iocContainer = new ClassPathXmlApplicationContext("bitcamp/java110/cms/conf/application-context.xml");
+    }
+    
+    private void logBeansOfContainer() {
+        System.out.println("================================================");
+        String[] nameList = iocContainer.getBeanDefinitionNames();
+        for(String name : nameList) {
+            System.out.println(name);
+        }
+        System.out.println("================================================");
+    }
+    private void processRequestMappingAnnotation(){
+        requestHandlerMap = new RequestMappingHandlerMapping();
+        String[] names = iocContainer.getBeanDefinitionNames();
+        for (String name : names) {
+            Object obj = iocContainer.getBean(name);
+            requestHandlerMap.addMapping(obj);
+        }
+    }
+    
+    
+    public void service() throws Exception{
+     // 클라이언트 연결을 기다리는 서버 소켓 준비
         ServerSocket serversocket = new ServerSocket(8888);
 
         while(true) {
@@ -29,7 +62,7 @@ public class ServerApp {
                 
                 System.out.println(in.readLine());
                 
-                out.println("OK"); out.flush();
+                out.println("OK: 윤건희"); out.flush();
                 
                 while (true) {
                     String requestLine = in.readLine();
@@ -39,7 +72,22 @@ public class ServerApp {
                         out.flush();
                         break;
                     }
-                    out.println(requestLine);
+                    
+                    RequestMappingHandler mapping = requestHandlerMap.getMapping(requestLine);
+                    if (mapping == null) {
+                        out.println("해당 요청을 처리할 수 없습니다.");
+                        out.println();
+                        out.flush();
+                        continue;
+                    }
+                    try {
+                        mapping.getMethod().invoke(mapping.getInstance(), out);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        out.println("요청 처리중 오류가 발생했습니다.");
+                        out.println();
+                        out.flush();
+                    }
                     out.println();
                     out.flush();
                 }
@@ -49,6 +97,12 @@ public class ServerApp {
 
             }
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ServerApp serverApp = new ServerApp();
+        serverApp.service();
+        
     }
 }
 
