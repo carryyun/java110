@@ -7,10 +7,11 @@ plugins {
 
 mainClassName = 'App'
 
-//프로ㅈ
-dependencies {
-    //프로제그에서 사용할 라이브러리 성정
-    //라이블러리 정보는 mvnrepository.com에서 검색해서 가져온다
+//프로젝트에서 사용할 라이브러리 성정
+//라이블러리 정보는 mvnrepository.com에서 검색해서 가져온다
+dependencies {    
+    //Spring IoC 컨테이너 관련 라이브러리
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.9.RELEASE'
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
