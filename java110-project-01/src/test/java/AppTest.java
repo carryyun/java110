@@ -3,13 +3,13 @@
  */
 import org.junit.Test;
 
-import bitcamp.java110.cms.App;
+import bitcamp.java110.cms.client.ClientApp;
 
 import static org.junit.Assert.*;
 
 public class AppTest {
     @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
+        ClientApp classUnderTest = new ClientApp();
         //assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
 }
