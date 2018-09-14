@@ -12,19 +12,22 @@ import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 
 //@Component
-public class StudentFileDao implements StudentDao{
-
+public class StudentFileDao implements StudentDao {
+    
     private List<Student> list = new ArrayList<>();
-
+    
     public StudentFileDao() {
         File dataFile = new File("data/student.dat");
-        //try autocloseable 메소드가 있는 인터페이스라면 try뒤 ( )에 내용을 넣으면 finally에서 닫아주지않아도 명령실행 후 자동으로 close된다.
-        try(BufferedReader in = new BufferedReader(new FileReader(dataFile))){
-            while(true) {
+        try (
+            BufferedReader in = 
+                new BufferedReader(new FileReader(dataFile))
+        ){
+            while (true) {
                 String line = in.readLine();
-                if (line == null) break;
-                
+                if (line == null)
+                    break;
                 String[] values = line.split(",");
+                
                 Student s = new Student();
                 s.setEmail(values[0]);
                 s.setName(values[1]);
@@ -35,11 +38,9 @@ public class StudentFileDao implements StudentDao{
                 
                 list.add(s);
             }
-
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
     
     private void save() {
@@ -63,8 +64,7 @@ public class StudentFileDao implements StudentDao{
             e.printStackTrace();
         }
     }
-
-
+    
     public int insert(Student student) {
         for (Student item : list) {
             if (item.getEmail().equals(student.getEmail())) {
@@ -75,11 +75,11 @@ public class StudentFileDao implements StudentDao{
         save();
         return 1;
     }
-
+    
     public List<Student> findAll() {
         return list;
     }
-
+    
     public Student findByEmail(String email) {
         for (Student item : list) {
             if (item.getEmail().equals(email)) {
@@ -88,15 +88,15 @@ public class StudentFileDao implements StudentDao{
         }
         return null;
     }
-
+    
     public int delete(String email) {
         for (Student item : list) {
             if (item.getEmail().equals(email)) {
                 list.remove(item);
-                save();
                 return 1;
             }
         }
+        save();
         return 0;
     }
 }

@@ -7,15 +7,16 @@ import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 
 @Component
-public class AutowiredAnnotationBeanPostProcessor implements BeanPostProcessor{
-    ApplicationContext beanContainer;
+public class AutowiredAnnotationBeanPostProcessor 
+        implements BeanPostProcessor {
     
+    ApplicationContext beanContainer;
+
     public void postProcess(ApplicationContext beanContainer) {
-     // objPool에 보관된 객체 목록을 꺼낸다.
+        // objPool에 보관된 객체 목록을 꺼낸다.
         Collection<Object> objList = beanContainer.objPool.values();
         
         for (Object obj : objList) {
-            
             Method[] methods = obj.getClass().getDeclaredMethods();
             for (Method m : methods) {
                 if (!m.isAnnotationPresent(Autowired.class)) continue;
@@ -33,12 +34,14 @@ public class AutowiredAnnotationBeanPostProcessor implements BeanPostProcessor{
                     System.out.printf("%s() 호출됨\n", m.getName());
                 } catch (Exception e) {}
             }
-            
         }
-        
     }
-
-    
-    
     
 }
+
+
+
+
+
+
+

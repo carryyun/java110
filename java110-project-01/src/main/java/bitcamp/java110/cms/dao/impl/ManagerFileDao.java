@@ -12,54 +12,55 @@ import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 
 //@Component
-public class ManagerFileDao implements ManagerDao{
+public class ManagerFileDao implements ManagerDao {
     private List<Manager> list = new ArrayList<>();
     
     public ManagerFileDao() {
-        File datafile =  new File("data/manager.dat");
-        try( BufferedReader in = new BufferedReader(new FileReader(datafile)) ){
-            while(true) {
+        File dataFile = new File("data/manager.dat");
+        try (
+            BufferedReader in = 
+                new BufferedReader(new FileReader(dataFile))
+        ){
+            while (true) {
                 String line = in.readLine();
-                if(line ==null) break;
-                
+                if (line == null)
+                    break;
                 String[] values = line.split(",");
                 
-                Manager s= new Manager();
-                s.setName(values[0]);
-                s.setEmail(values[1]);
-                s.setPassword(values[2]);
-                s.setPosition(values[3]);
-                s.setTel(values[4]);
+                Manager m = new Manager();
+                m.setEmail(values[0]);
+                m.setName(values[1]);
+                m.setPassword(values[2]);
+                m.setPosition(values[3]);
+                m.setTel(values[4]);
                 
-                list.add(s);
-                
+                list.add(m);
             }
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
     }
     
-    public void save() {
-        File datafile = new File("data/manager.dat");
-        try( BufferedWriter out= new BufferedWriter(new FileWriter(datafile)) ){
-            for(Manager s : list) {
+    private void save() {
+        File dataFile = new File("data/manager.dat");
+        try (
+            BufferedWriter out = 
+                new BufferedWriter(new FileWriter(dataFile))
+        ){
+            for (Manager m : list) {
                 out.write(
-                        String.format("%s,%s,%s,%s,%s\n", 
-                            s.getEmail(),
-                            s.getName(),
-                            s.getPassword(),
-                            s.getPosition(),
-                            s.getTel() ));
+                    String.format("%s,%s,%s,%s,%s\n", 
+                        m.getEmail(),
+                        m.getName(),
+                        m.getPassword(),
+                        m.getPosition(),
+                        m.getTel()));
             }
             out.flush();
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        
     }
-    
     
     public int insert(Manager manager) {
         for (Manager item : list) {
@@ -89,10 +90,10 @@ public class ManagerFileDao implements ManagerDao{
         for (Manager item : list) {
             if (item.getEmail().equals(email)) {
                 list.remove(item);
-                save();
                 return 1;
             }
         }
+        save();
         return 0;
     }
 }

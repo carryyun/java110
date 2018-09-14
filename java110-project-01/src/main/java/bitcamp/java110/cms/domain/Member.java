@@ -2,8 +2,9 @@ package bitcamp.java110.cms.domain;
 
 import java.io.Serializable;
 
-public class Member implements Serializable{
+public class Member implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     protected int no;
     protected String name;
     protected String email;

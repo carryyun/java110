@@ -7,7 +7,7 @@ import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 
 //@Component
-public class ManagerListDao implements ManagerDao{
+public class ManagerListDao implements ManagerDao {
     private List<Manager> list = new ArrayList<>();
     
     public int insert(Manager manager) {

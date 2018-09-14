@@ -1,6 +1,6 @@
 package bitcamp.java110.cms.dao;
 
-public class DuplicationDaoException extends Exception{
+public class DuplicationDaoException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public DuplicationDaoException() {
@@ -15,6 +15,4 @@ public class DuplicationDaoException extends Exception{
         super(message);
     }
     
-    
-
 }
