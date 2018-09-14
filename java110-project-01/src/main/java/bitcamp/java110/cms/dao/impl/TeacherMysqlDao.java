@@ -13,7 +13,7 @@ import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 
 @Component
-public class TeacherJdbcDao implements TeacherDao {
+public class TeacherMysqlDao implements TeacherDao {
     
     public int insert(Teacher teacher) {
         Connection con = null;
