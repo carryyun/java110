@@ -36,7 +36,7 @@ public class ClientApp {
                     if (responseLine.length() == 0)
                         break;
                 }
-                if (requestLine.equals("EXIT")){
+                if (requestLine.equals("EXIT")) {
                     break;
                 } 
             }

@@ -24,7 +24,7 @@ public class StudentMysqlDao implements StudentDao {
         this.dataSource = dataSource;
     }
     
-    public int insert(Student student) {
+    public int insert(Student student) throws DaoException{
         Connection con = null;
         Statement stmt = null;
         
@@ -65,7 +65,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public List<Student> findAll() {
+    public List<Student> findAll() throws DaoException {
         
         ArrayList<Student> list = new ArrayList<>();
         
@@ -107,7 +107,7 @@ public class StudentMysqlDao implements StudentDao {
         return list;
     }
     
-    public Student findByEmail(String email) {
+    public Student findByEmail(String email) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -149,7 +149,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public Student findByNo(int no) {
+    public Student findByNo(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -192,7 +192,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public int delete(int no) {
+    public int delete(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
