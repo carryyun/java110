@@ -1,8 +1,8 @@
 
 plugins {
     id 'java'
-    id 'application'
-    id 'eclipse'
+    id 'eclipse-wtp' // web tool plugin
+    id 'war'
 }
 
 tasks.withType(JavaCompile) {
@@ -11,11 +11,12 @@ tasks.withType(JavaCompile) {
     targetCompatibility = '1.8'
 }
 
-mainClassName = 'bitcamp.java110.cms.App'
-
 //프로젝트에서 사용할 라이브러리 성정
 //라이블러리 정보는 mvnrepository.com에서 검색해서 가져온다
 dependencies {    
+    //servlet API 라이브러리
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
     //Spring IoC 컨테이너 관련 라이브러리
     compile group: 'org.springframework', name: 'spring-context', version: '5.0.9.RELEASE'
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
