@@ -6,31 +6,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import bitcamp.java110.cms.dao.DaoException;
 import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 import bitcamp.java110.cms.util.DataSource;
 
-@Component
 public class TeacherMysqlDao implements TeacherDao {
-    
+
     DataSource dataSource;
     
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
+
     public int insert(Teacher teacher) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
         try {
-            
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             con.setAutoCommit(false);
 
@@ -77,7 +71,7 @@ public class TeacherMysqlDao implements TeacherDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             
@@ -116,7 +110,7 @@ public class TeacherMysqlDao implements TeacherDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(
@@ -158,7 +152,7 @@ public class TeacherMysqlDao implements TeacherDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(
@@ -200,7 +194,7 @@ public class TeacherMysqlDao implements TeacherDao {
         Statement stmt = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             con.setAutoCommit(false);
             stmt = con.createStatement();

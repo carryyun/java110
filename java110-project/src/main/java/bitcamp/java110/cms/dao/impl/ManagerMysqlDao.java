@@ -6,31 +6,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import bitcamp.java110.cms.dao.DaoException;
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.util.DataSource;
 
-@Component
 public class ManagerMysqlDao implements ManagerDao {
     
     DataSource dataSource;
     
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
+
     public int insert(Manager manager) throws DaoException {
-        
         Statement stmt = null;
+        
         Connection con = null;
+        
         try {
-            con=dataSource.getConnection();
-            
+            con = dataSource.getConnection();
+
             con.setAutoCommit(false);
 
             stmt = con.createStatement();
@@ -56,6 +52,7 @@ public class ManagerMysqlDao implements ManagerDao {
             
             con.commit();
             return 1;
+            
         } catch (Exception e) {
             try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
@@ -74,20 +71,10 @@ public class ManagerMysqlDao implements ManagerDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
-            //=> 질의문을 작성할 객체를 준비한다.
             stmt = con.createStatement();
             
-            //=> select 질의를 한다.
-            /*
-             select
-                 m.name,
-                 m.email,
-                 mr.posi
-             from p1_mgr mr 
-                 inner join p1_memb m on mr.mrno = m.mno  
-             */
             rs = stmt.executeQuery(
                     "select" + 
                     " m.mno," +
@@ -97,7 +84,6 @@ public class ManagerMysqlDao implements ManagerDao {
                     " from p1_mgr mr" + 
                     " inner join p1_memb m on mr.mrno = m.mno");
             
-            // 서버에 생성된 질의 결과를 한 개씩 가져온다.
             while (rs.next()) {
                 Manager mgr = new Manager();
                 mgr.setNo(rs.getInt("mno"));
@@ -109,6 +95,7 @@ public class ManagerMysqlDao implements ManagerDao {
             }
         } catch (Exception e) {
             throw new DaoException(e);
+            
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
@@ -122,7 +109,7 @@ public class ManagerMysqlDao implements ManagerDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(
@@ -163,7 +150,7 @@ public class ManagerMysqlDao implements ManagerDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(
@@ -203,7 +190,7 @@ public class ManagerMysqlDao implements ManagerDao {
         Statement stmt = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             con.setAutoCommit(false);
             stmt = con.createStatement();
@@ -228,6 +215,7 @@ public class ManagerMysqlDao implements ManagerDao {
             try {stmt.close();} catch (Exception e) {}
         }
     }
+    
 }
 
 

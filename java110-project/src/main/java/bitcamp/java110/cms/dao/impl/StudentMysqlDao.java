@@ -6,30 +6,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import bitcamp.java110.cms.dao.DaoException;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.util.DataSource;
 
-@Component
 public class StudentMysqlDao implements StudentDao {
-    
+
     DataSource dataSource;
     
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
-    public int insert(Student student) throws DaoException{
+
+    public int insert(Student student) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
+            
+            con.setAutoCommit(false);
 
             stmt = con.createStatement();
             String sql = "insert into p1_memb(name,email,pwd,tel,cdt)"
@@ -74,13 +71,13 @@ public class StudentMysqlDao implements StudentDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             
             rs = stmt.executeQuery(
                     "select" + 
-                    " m.mno," + 
+                    " m.mno," +
                     " m.name," + 
                     " m.email," + 
                     " s.schl," +
@@ -113,10 +110,10 @@ public class StudentMysqlDao implements StudentDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
-            rs = stmt.executeQuery( 
+            rs = stmt.executeQuery(
                     "select" + 
                     " m.mno," +
                     " m.name," + 
@@ -155,7 +152,7 @@ public class StudentMysqlDao implements StudentDao {
         ResultSet rs = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(
@@ -197,7 +194,7 @@ public class StudentMysqlDao implements StudentDao {
         Statement stmt = null;
         
         try {
-            con=dataSource.getConnection();
+            con = dataSource.getConnection();
             
             con.setAutoCommit(false);
             stmt = con.createStatement();
@@ -220,8 +217,7 @@ public class StudentMysqlDao implements StudentDao {
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
-       
-        }    
+        }
     }
 }
 
