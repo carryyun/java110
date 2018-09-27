@@ -1,0 +1,33 @@
+
+plugins {
+    id 'java'
+    id 'eclipse-wtp' // web tool plugin
+    id 'war'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+//프로젝트에서 사용할 라이브러리 성정
+//라이블러리 정보는 mvnrepository.com에서 검색해서 가져온다
+dependencies {    
+    //servlet API 라이브러리
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+    //Spring IoC 컨테이너 관련 라이브러리
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.9.RELEASE'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+    
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.3.0'
+    
+}
+
+repositories {
+    mavenCentral()
+}
