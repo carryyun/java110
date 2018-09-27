@@ -13,6 +13,7 @@
  *      init()에서 필요한 자원을 미리 준비시키는 것이 좋다.
  *    - 모든 서블릿들이 공유하는 자원을 준비시킬 때도 응용할 수 있다.
  */
+
 package bitcamp.java110.ex06;
 
 import java.io.IOException;

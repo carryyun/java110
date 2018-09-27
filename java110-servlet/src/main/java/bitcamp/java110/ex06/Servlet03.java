@@ -6,6 +6,12 @@
  *       /WEB-INF/web.xml에 서블릿 배치 정보를 설정한다.
  *       'web.xml'을 배치설명자(Deployment Descriptor 파일; DD파일)라 부른다.
  * 
+ * => 주의!
+ *    web.xml 파일을 사용할 때 다음 속성 값을 false로 설정하지 않으면
+ *    애뇨테이션으로 배치한 정보를 처리하지 못한다.
+ *    <web-app metadata-complete="false">
+ *    ...
+ *    </web-app>
  */
 package bitcamp.java110.ex06;
 
