@@ -20,25 +20,50 @@ public class TeacherDetailServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest request, 
             HttpServletResponse response) 
-            throws ServletException, IOException {
+                    throws ServletException, IOException {
 
         int no = Integer.parseInt(request.getParameter("no"));
         TeacherDao teacherDao = (TeacherDao) this.getServletContext().getAttribute("teacherDao");
         Teacher t = teacherDao.findByNo(no);
-        
-        response.setContentType("text/plain;charset=UTF-8");
+
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset=\"UTF-8\">");
+        out.println("<title>강사 관리</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>강사 목록</h1>");
+        
         if (t == null) {
             out.println("해당 번호의 강사 정보가 없습니다!");
-            return;
-        }
-        
-        out.printf("이름: %s\n", t.getName());
-        out.printf("이메일: %s\n", t.getEmail());
-        out.printf("암호: %s\n", t.getPassword());
-        out.printf("전화: %s\n", t.getTel());
-        out.printf("시급: %d\n", t.getPay());
-        out.printf("강의과목: %s\n", t.getSubjects());
-    }
+        }else {
+            out.println("<table>");
+            out.println("<tbody>");
+            out.printf("<tr><th>번호</th><td>%d</td></tr>\n", t.getNo());
+            out.printf("<tr><th>이름</th><td>%s\n", t.getName());
+            out.printf("<tr><th>이메일</th><td>%s\n", t.getEmail());
+            out.printf("<tr><th>암호</th><td>%s\n", t.getPassword());
+            out.printf("<tr><th>급여</th><td>%d\n", t.getPay());
+            out.printf("<tr><th>전화</th><td>%s\n", t.getTel());
+            out.printf("<tr><th>과목</th><td>%b\n", t.getSubjects());
+            out.println("</tbody>");
+            out.println("</table>");
 
+            out.println("<button type='button' onclick='remove()'>삭제</button>");
+        }
+
+
+
+        out.println("<script>");
+        out.println("function remove() {");
+        out.printf("location.href = 'delete?no=%d'", t.getNo());
+        out.println("}");
+        out.println("</script>");
+        out.println("</body>");
+        out.println("</html>");
+    }
 }

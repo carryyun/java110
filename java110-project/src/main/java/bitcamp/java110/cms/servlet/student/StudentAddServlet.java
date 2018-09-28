@@ -17,11 +17,12 @@ public class StudentAddServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doGet(
+    protected void doPost(
             HttpServletRequest request, 
             HttpServletResponse response) 
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
+        
         Student m = new Student();
         m.setName(request.getParameter("name"));
         m.setEmail(request.getParameter("email"));
@@ -30,14 +31,32 @@ public class StudentAddServlet extends HttpServlet {
         m.setSchool(request.getParameter("school"));
         m.setWorking(Boolean.parseBoolean(request.getParameter("working")));
         
-        response.setContentType("text/plain;charset=UTF-8");
+        response.setHeader("Refresh", "1;url=list");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
         StudentDao studentDao = (StudentDao) this.getServletContext().getAttribute("studentDao");
-        if (studentDao.insert(m) > 0) {
-            out.println("저장하였습니다.");
-        } else {
-            out.println("같은 이메일의 학생이 존재합니다.");
+        
+
+        try {
+            studentDao.insert(m);
+            out.println("<p>저장하였습니다.</p>");
+            response.setHeader("Refresh", "0;url=list");
+        }catch(Exception e) {
+            e.printStackTrace();
+            response.setHeader("Refresh", "2;url=list");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset=\"UTF-8\">");
+            out.println("<title>학생 관리</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>학생 등록 오류</h1>");
+            out.printf("<p>%s</p>\n",e.getMessage());
+            out.println("<p>잠시 기다리면 목록 페이지로 자동으로 이동합니다.</p>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
  

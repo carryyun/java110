@@ -19,18 +19,33 @@ public class TeacherDeleteServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest request, 
             HttpServletResponse response) 
-            throws ServletException, IOException {
-
+                    throws ServletException, IOException {
         int no = Integer.parseInt(request.getParameter("no"));
-        
-        response.setContentType("text/plain;charset=UTF-8");
+
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         TeacherDao teacherDao = (TeacherDao) this.getServletContext().getAttribute("teacherDao");
-        if (teacherDao.delete(no) > 0) {
-            out.println("삭제하였습니다.");
-        } else {
-            out.println("번호에 해당하는 강사가 없습니다.");
+
+        try {
+            teacherDao.delete(no);
+            out.println("<p>삭제하였습니다.</p>");
+            System.out.println(request.getRemoteAddr()); // 아이피따기
+            response.setHeader("Refresh", "0;url=list");
+        }catch(Exception e) {
+            e.printStackTrace();
+            response.setHeader("Refresh", "2;url=list");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset=\"UTF-8\">");
+            out.println("<title>강사 관리</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>강사 삭제 오류</h1>");
+            out.printf("<p>%s</p>\n",e.getMessage());
+            out.println("<p>잠시 기다리면 목록 페이지로 자동으로 이동합니다.</p>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
-
 }

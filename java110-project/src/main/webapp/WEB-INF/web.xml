@@ -34,9 +34,12 @@
     <!-- 리스너 클래스에 대한 정보 설정 -->
     
     
-    <!--  
+    <!-- 다음 태그가 지원이 안되는 경우,
+         request.setCharacterEncoding()으로 POST 요청 한글
+     -->
+    <!-- 
     <request-character-encoding>UTF-8</request-character-encoding>
-    -->
+     -->
     
     <!-- 리스너 배치하기 -->
       <listener>
