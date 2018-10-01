@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,7 @@ public class ManagerListServlet extends HttpServlet {
         out.println("<head>");
         out.println("<meta charset=\"UTF-8\">");
         out.println("<title>매니저 관리</title>");
-        
+        out.println("<link rel='stylesheet' type='text/css' href='../css/common.css'>");
         out.println("<style>");
         out.println("table, td, th{");
         out.println("border: 1px solid silver;");
@@ -43,6 +44,11 @@ public class ManagerListServlet extends HttpServlet {
         
         out.println("</head>");
         out.println("<body>");
+        
+        // 페이지 머리말 포함하기
+        RequestDispatcher rd = request.getRequestDispatcher("/header");
+        rd.include(request, response);
+        
         out.println("<h1>매니저 목록</h1>");
         
         out.println("<p><a href='form.html'>추가</a></p>");
@@ -52,7 +58,6 @@ public class ManagerListServlet extends HttpServlet {
         out.println("<tr><th>번호</th><th>이름</th><th>이메일</th><th>직위</th></tr>\n");
         out.println("</thead>");
         out.println("<tbody>");
-
         for (Manager m : list) {
             out.printf("<tr>");
             out.printf(" <td>%d</td>\n", m.getNo());
@@ -62,6 +67,10 @@ public class ManagerListServlet extends HttpServlet {
             out.printf("</tr>");
         }
         out.println("</tbody>");
+        out.println("</table>");
+        
+        rd = request.getRequestDispatcher("/footer");
+        rd.include(request, response);
         out.println("</body>");
         out.println("</html>");
     }
