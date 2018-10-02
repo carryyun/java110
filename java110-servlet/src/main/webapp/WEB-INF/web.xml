@@ -17,13 +17,12 @@
         <param-name>aaa</param-name>
         <param-value>okok</param-value>
     </context-param>
-    
+
     <!-- 리스너 클래스에 대한 정보 설정 -->
     <listener>
         <listener-class>bitcamp.java110.ex07.Listener01</listener-class>
     </listener>
-    
-    
+
     <!--  
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
@@ -50,7 +49,6 @@
       </init-param>
       <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet>
       <servlet-name>Servlet05</servlet-name>
       <servlet-class>bitcamp.java110.ex06.Servlet05</servlet-class>
@@ -82,8 +80,3 @@
     </welcome-file-list>
 
 </web-app>
-
-
-
-
-

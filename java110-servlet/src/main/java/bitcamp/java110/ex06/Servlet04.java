@@ -7,44 +7,45 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet(
-//        value="/ex06/servlet04",
-//        loadOnStartup=1,
-//        initParams= {
-//                @WebInitParam(name="aaa", value="hello"),
-//                @WebInitParam(name="bbb", value="hello2"),
-//                @WebInitParam(name="ccc", value="hello3")
-//        })
+/*
+@WebServlet(
+        value="/ex06/servlet04",
+        loadOnStartup=1,
+        initParams= {
+                @WebInitParam(name="aaa",value="hello"),
+                @WebInitParam(name="bbb",value="hello2"),
+                @WebInitParam(name="ccc",value="hello3")
+        })
+*/
 public class Servlet04 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public Servlet04() {
-        System.out.println("ex06.servlet04...생성자 호출됨");
+        System.out.println("ex06.Servlet04...생성자 호출됨!");
     }
+    
     @Override
     public void init() throws ServletException {
-        System.out.println("ex06.servlet04.init()...호출됨");
+        System.out.println("ex06.Servlet04.init()...호출됨!");
     }
     
     @Override
     public void service(
-            ServletRequest req, 
-            ServletResponse res) 
-                    throws ServletException, IOException {
+            HttpServletRequest req, 
+            HttpServletResponse res) 
+            throws ServletException, IOException {
 
         res.setContentType("text/plain;charset=UTF-8");
         PrintWriter out = res.getWriter();
-
-      //배치 정보에서 초기화 파라미터 값을 꺼내기
-        out.printf("aaa=%s\n",this.getInitParameter("aaa"));
-        out.printf("bbb=%s\n",this.getInitParameter("bbb"));
-        out.printf("ccc=%s\n",this.getInitParameter("ccc"));
+        
+        // 배치 정보에서 초기화 파라미터 값을 꺼내기
+        out.printf("aaa=%s\n", this.getInitParameter("aaa"));
+        out.printf("bbb=%s\n", this.getInitParameter("bbb"));
+        out.printf("ccc=%s\n", this.getInitParameter("ccc"));
     }
 }
 
