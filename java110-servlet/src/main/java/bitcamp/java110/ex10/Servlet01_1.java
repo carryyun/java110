@@ -43,16 +43,7 @@ public class Servlet01_1 extends HttpServlet {
         res.addCookie(c1);
         res.addCookie(c2);
         res.addCookie(c3);
-        /* HTTP 응답 프로토콜 예)
-HTTP/1.1 200
-Set-Cookie: name=hongkildong     <=== 클라이언트로 쿠키를 보내는 방법
-Set-Cookie: age=12
-Set-Cookie: working=true
-Content-Type: text/html;charset=UTF-8
-Content-Length: 130
-Date: Mon, 01 Oct 2018 02:49:43 GMT         
-         */
-        
+ 
         res.setContentType("text/html;charset=UTF-8");
         PrintWriter out = res.getWriter();
         
