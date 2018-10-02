@@ -1,9 +1,7 @@
 package bitcamp.java110.cms.servlet.manager;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,18 +22,15 @@ public class ManagerDeleteServlet extends HttpServlet {
         
         int no = Integer.parseInt(request.getParameter("no"));
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        ManagerDao managerDao = (ManagerDao) this.getServletContext().getAttribute("managerDao");
         
-        
+        ManagerDao managerDao = (ManagerDao)this.getServletContext()
+                .getAttribute("managerDao");
         
         try {
             managerDao.delete(no);
-            out.println("<p>삭제하였습니다.</p>");
-            System.out.println(request.getRemoteAddr()); // 아이피따기
-            response.setHeader("Refresh", "0;url=list");
-        }catch(Exception e) {
+            response.sendRedirect("list");
+            
+        } catch (Exception e) {
             request.setAttribute("error", e);
             request.setAttribute("message", "매니저 삭제 오류!");
             request.setAttribute("refresh", "3;url=list");

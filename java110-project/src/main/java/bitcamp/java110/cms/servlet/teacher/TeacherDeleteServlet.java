@@ -1,7 +1,6 @@
 package bitcamp.java110.cms.servlet.teacher;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,29 +13,30 @@ import bitcamp.java110.cms.dao.TeacherDao;
 @WebServlet("/teacher/delete")
 public class TeacherDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    
     @Override
     protected void doGet(
             HttpServletRequest request, 
             HttpServletResponse response) 
-                    throws ServletException, IOException {
+            throws ServletException, IOException {
+
         int no = Integer.parseInt(request.getParameter("no"));
-
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        TeacherDao teacherDao = (TeacherDao) this.getServletContext().getAttribute("teacherDao");
-
+        
+        TeacherDao teacherDao = (TeacherDao)this.getServletContext()
+                .getAttribute("teacherDao");
+        
         try {
             teacherDao.delete(no);
-            out.println("<p>삭제하였습니다.</p>");
-            System.out.println(request.getRemoteAddr()); // 아이피따기
-            response.setHeader("Refresh", "0;url=list");
-        }catch(Exception e) {
+            response.sendRedirect("list");
+            
+        } catch (Exception e) {
             request.setAttribute("error", e);
             request.setAttribute("message", "강사 삭제 오류!");
             request.setAttribute("refresh", "3;url=list");
             
             request.getRequestDispatcher("/error").forward(request, response);
         }
+        
     }
+
 }
