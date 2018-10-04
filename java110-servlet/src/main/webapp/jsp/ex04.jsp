@@ -8,21 +8,24 @@
 <title>JSP</title>
 </head>
 <body>
-<ul>
-<%  //_jspService() 메서드 안에 자바코드 작성한다는 것을 잊지말자!
-String[] names={"홍길동","임꺽정","유관순"}; 
+<h1>스크립트릿(scriptlet) 응용</h1>
+<% // _jspService() 메서드 안에 자바코드를 작성한다는 것을 절대 잊지말자!
+String[] names = {"홍길동", "임꺽정", "유관순"};
 %>
 
-
-<% for(String name : names) { %>
-
-<li><% out.write(name); %></li>
-<!-- <% out.write("<li>" + name + "</li>"); %> -->
-
+<ul>
+<%for (String name : names) { %>
+    <li><%out.write(name);%></li>
 <%} %>
 </ul>
+
+
+ 
 </body>
 </html>
+
+
+
 
 
 
