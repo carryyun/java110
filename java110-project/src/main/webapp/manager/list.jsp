@@ -10,7 +10,7 @@
 <head>
 <meta charset='UTF-8'>
 <title>매니저 관리</title>
-<link rel='stylesheet' href='../../css/common.css'>
+<link rel='stylesheet' href='../css/common.css'>
 <style>
 table, th, td {
     border: 1px solid gray;
@@ -21,8 +21,8 @@ table, th, td {
 
 <jsp:include page="../header.jsp"></jsp:include>
 
-<h1>매니저 목록</h1>
-<p><a href='form.html'>추가</a></p>
+<h1>매니저 목록(MVC)</h1>
+<p><a href='add'>추가</a></p>
 <table>
 <thead>
 <tr>
@@ -31,9 +31,7 @@ table, th, td {
 </thead>
 <tbody>
 <%
-ManagerDao managerDao = (ManagerDao)this.getServletContext()
-.getAttribute("managerDao");
-List<Manager> list = managerDao.findAll();
+List<Manager> list = (List<Manager>) request.getAttribute("list");
 for (Manager m : list) {
 %>
 <tr>
