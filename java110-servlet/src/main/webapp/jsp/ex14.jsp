@@ -11,17 +11,17 @@
 <title>JSP액션태그</title>
 </head>
 <body>
-<h1>jsp:useBean - scope의 기본 값은 page이다.</h1>
-<%
-request.setAttribute("name", "유관순");//ServletRequest 보관소
-//pageContext.setAttribute("name", "안중근");//PageContext 보관소
-%>
+<h1>jsp:include - RequestDispatcher.include()</h1>
+<pre>
+- 다른 서블릿(또는 JSP)의 실행을 포함할 때 사용한다.
+    &lt;jsp:include page="서블릿 또는 JSP URL">
+</pre>
 
-<jsp:useBean    
-    id="name"
-    class="java.lang.String"/>
+<jsp:include page="ex14_header.jsp"></jsp:include>
 
-<p>이름: <%=name%></p>
+<p>내용입니다.</p>
+
+<jsp:include page="ex14_footer.jsp"></jsp:include>
 
 </body>
 </html>

@@ -11,17 +11,8 @@
 <title>JSP액션태그</title>
 </head>
 <body>
-<h1>jsp:useBean - scope의 기본 값은 page이다.</h1>
-<%
-request.setAttribute("name", "유관순");//ServletRequest 보관소
-//pageContext.setAttribute("name", "안중근");//PageContext 보관소
-%>
 
-<jsp:useBean    
-    id="name"
-    class="java.lang.String"/>
-
-<p>이름: <%=name%></p>
+<p>연산자 '<%=request.getParameter("op")%>'를 지원하지 않습니다!</p>
 
 </body>
 </html>

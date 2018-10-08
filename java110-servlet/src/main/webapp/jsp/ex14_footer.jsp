@@ -1,8 +1,7 @@
 <%@ page language="java" 
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<p>ex09_2 내용</p>
-
+<address>&copy;비트캠프, 서울시 서초구</address>
 
 
 

@@ -1,8 +1,7 @@
 <%@ page language="java" 
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<p>ex09_2 내용</p>
-
+<h1>제목입니다.</h1>
 
 
 
