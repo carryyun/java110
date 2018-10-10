@@ -1,17 +1,22 @@
 package bitcamp.java110.cms.servlet.manager;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.service.ManagerService;
 
+@MultipartConfig(maxFileSize=2_000_000)
 @WebServlet("/manager/add")
 public class ManagerAddServlet extends HttpServlet { 
     private static final long serialVersionUID = 1L;
@@ -48,11 +53,18 @@ public class ManagerAddServlet extends HttpServlet {
         m.setTel(request.getParameter("tel"));
         m.setPosition(request.getParameter("position"));
         
-        ManagerDao managerDao = (ManagerDao)this.getServletContext()
-                .getAttribute("managerDao");
+        ManagerService managerService = (ManagerService)this.getServletContext()
+                .getAttribute("managerService");
         
         try {
-            managerDao.insert(m);
+            Part part = request.getPart("file1");
+            if (part.getSize() > 0) {
+                String filename = UUID.randomUUID().toString();
+                part.write(this.getServletContext()
+                           .getRealPath("/upload/" + filename));
+                m.setPhoto(filename);
+            }
+            managerService.add(m);
             
             // 오류 없이 등록에 성공했으면, 
             // 목록 페이지를 다시 요청하라고 redirect 명령을 보낸다.
