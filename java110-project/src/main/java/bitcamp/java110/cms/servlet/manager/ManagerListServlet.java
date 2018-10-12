@@ -24,8 +24,9 @@ public class ManagerListServlet extends HttpServlet {
             throws ServletException, IOException {
         
         // JSP가 사용할 데이터 준비 
-        ManagerService managerService = (ManagerService)this.getServletContext()
-                .getAttribute("managerService");
+        ManagerService managerService = 
+                (ManagerService)this.getServletContext()
+                                    .getAttribute("managerService");
         List<Manager> list = managerService.list();
         
         // JSP 사용할 수 있도록 ServletRequest 보관소에 저장한다.

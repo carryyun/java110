@@ -3,6 +3,7 @@ package bitcamp.java110.cms.servlet.manager;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,9 @@ public class ManagerDetailServlet extends HttpServlet {
         // JSP 페이지에서 사용할 데이터를 준비한다.
         int no = Integer.parseInt(request.getParameter("no"));
 
-        ManagerService managerService = (ManagerService)this.getServletContext()
-                .getAttribute("managerService");
+        ServletContext sc = this.getServletContext();
+        ManagerService managerService = 
+                (ManagerService)sc.getAttribute("managerService");
         Manager m = managerService.get(no);
         
         // JSP 페이지에서 사용할 수 있도록 ServletRequest 보관소에 저장한다.

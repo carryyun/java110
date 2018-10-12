@@ -47,12 +47,10 @@ th {
     <th>강의과목</th>
     <td><input type='text' name='subjects'></td>
 </tr>
-
 <tr>
     <th>사진</th>
     <td><input type='file' name='file1'></td>
 </tr>
-
 <tr>
     <th></th>
     <td><button>등록</button></td>

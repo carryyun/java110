@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 import bitcamp.java110.cms.service.TeacherService;
 
@@ -55,6 +54,7 @@ public class TeacherAddServlet extends HttpServlet {
                 .getAttribute("teacherService");
         
         try {
+            // 사진 데이터 처리
             Part part = request.getPart("file1");
             if (part.getSize() > 0) {
                 String filename = UUID.randomUUID().toString();

@@ -50,12 +50,10 @@ th {
         <option value='true'>재직중</option>
     </select></td>
 </tr>
-
 <tr>
     <th>사진</th>
     <td><input type='file' name='file1'></td>
 </tr>
-
 <tr>
     <th></th>
     <td><button>등록</button></td>

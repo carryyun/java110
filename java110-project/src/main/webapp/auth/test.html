@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>로그인</title>
+<style>
+th {
+    text-align: right;
+}
+</style>
+</head>
+<body>
+
+<h1>로그인</h1>
+<pre>
+"select" + 
+" m.mno," +
+" m.name," + 
+" m.email," + 
+" m.tel," + 
+" mr.posi" + 
+" from p1_mgr mr" + 
+" inner join p1_memb m on mr.mrno = m.mno" +
+" where m.email='" + email + "' and m.pwd=password('" + password + "')");
+만약 email 값이 다음과 같다면,
+1@test.com' and 1=1 or 'x'='y
+</pre>
+<form action='login' method='post'>
+<table>
+<tr>
+    <th></th>
+    <td>
+        <input type='radio' name='type' value='student' checked>학생
+        <input type='radio' name='type' value='teacher'>강사
+        <input type='radio' name='type' value='manager'>매니저
+    </td>
+</tr>
+<tr>
+    <th>이메일</th>
+    <td><input type='text' name='email'></td>
+</tr>
+<tr>
+    <th>암호</th>
+    <td><input type='password' name='password'></td>
+</tr>
+<tr>
+    <th></th>
+    <td><input type='checkbox' name='save'>이메일 저장</td>
+</tr>
+<tr>
+    <th></th>
+    <td><button>로그인</button></td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+    
