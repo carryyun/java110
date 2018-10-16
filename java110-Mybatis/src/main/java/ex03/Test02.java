@@ -1,15 +1,14 @@
-// 주제: Mybatis 적용
+// 주제: Mybatis 적용 - 입력 테스트
 package ex03;
 
 import java.io.InputStream;
-import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class Test02 {
-
+ 
     public static void main(String[] args) throws Exception {
         
         // 1) mybatis 설정 파일 경로
@@ -30,8 +29,8 @@ public class Test02 {
         memberDao.setSqlSessionFactory(sqlSessionFactory);
         
         Member m = new Member();
-        m.setName("홍길동");
-        m.setEmail("hong2@test.com");
+        m.setName("홍길동3");
+        m.setEmail("hong3@test.com");
         m.setPassword("1111");
         m.setTel("1111-2222");
         
@@ -40,6 +39,8 @@ public class Test02 {
         memberDao.insert(m);
         
         System.out.println(m.getNo());
+        
+        
     }
 
 }

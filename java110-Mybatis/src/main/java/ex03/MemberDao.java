@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-public class MemberDao {
+public class MemberDao { 
 
     // Mybatis 객체를 사용하기 위해 주입받는다.
     SqlSessionFactory sqlSessionFactory;
@@ -15,19 +15,19 @@ public class MemberDao {
     }
 
     public int insert(Member member) {
-        // Mybatis는 autoCommit 기본 값이 false이다.
+        // Mybatis는 autoCommit 기본 값이 false이다. 
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             int count = sqlSession.insert("memberdao.insert", member);
             sqlSession.commit();
             return count;
-            
         } finally {
             sqlSession.close();
         }
     }
     
     public int delete(int no) {
+        // Mybatis는 autoCommit 기본 값이 false이다. 
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             int count = sqlSession.delete("memberdao.delete", no);
@@ -50,7 +50,7 @@ public class MemberDao {
     public Member findByNo(int no) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
-            return sqlSession.selectOne("memberdao.findByNo",no);
+            return sqlSession.selectOne("memberdao.findByNo", no);
         } finally {
             sqlSession.close();
         }

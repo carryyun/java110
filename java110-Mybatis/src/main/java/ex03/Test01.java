@@ -8,7 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class Test01 {
+public class Test01 { 
 
     public static void main(String[] args) throws Exception {
         

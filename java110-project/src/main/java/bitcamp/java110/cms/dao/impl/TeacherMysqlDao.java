@@ -25,11 +25,10 @@ public class TeacherMysqlDao implements TeacherDao {
         
         try {
             con = dataSource.getConnection();
-            String sql = "insert into p1_tchr(tno,hrpay,subj)"
-                    + " values(?,?,?)";
+            String sql = "insert into p1_tchr(tno,hrpay,subj) values(?,?,?)";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, teacher.getNo());
-            stmt.setString(2, teacher.getPassword());
+            stmt.setInt(2, teacher.getPay());
             stmt.setString(3, teacher.getSubjects());
             return stmt.executeUpdate();
             
@@ -59,8 +58,8 @@ public class TeacherMysqlDao implements TeacherDao {
                     " t.hrpay," +
                     " t.subj" +
                     " from p1_tchr t" + 
-                    " inner join p1_memb m on t.tno = m.mno";
-            stmt = con.prepareStatement(sql);            
+                    " inner join p1_memb m on t.tno=m.mno";
+            stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
@@ -90,7 +89,7 @@ public class TeacherMysqlDao implements TeacherDao {
         
         try {
             con = dataSource.getConnection();
-            String sql="select" + 
+            String sql = "select" + 
                     " m.mno," +
                     " m.name," + 
                     " m.email," + 
@@ -203,7 +202,7 @@ public class TeacherMysqlDao implements TeacherDao {
         
         try {
             con = dataSource.getConnection();
-            String sql ="select" + 
+            String sql = "select" + 
                     " m.mno," +
                     " m.name," + 
                     " m.email," + 
@@ -217,7 +216,6 @@ public class TeacherMysqlDao implements TeacherDao {
             stmt.setString(1, email);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
-                    
             
             if (rs.next()) {
                 Teacher t = new Teacher();

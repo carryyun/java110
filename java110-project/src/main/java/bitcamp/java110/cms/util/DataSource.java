@@ -40,12 +40,14 @@ public class DataSource {
         while (connections.size() > 0) {
             con = connections.remove(0);
             if (!con.isClosed() && con.isValid(3)) {
+                System.out.println("기존 커넥션 사용!");
                 break;
             }
             con = null;
         }
         
         if (con == null) {
+            System.out.println("새 커넥션 사용!");
             con = DriverManager.getConnection(url, username, password);
         }
         
