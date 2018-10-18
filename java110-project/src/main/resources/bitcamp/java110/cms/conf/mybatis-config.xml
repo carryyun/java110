@@ -24,7 +24,11 @@
   </environments>
   
   <mappers>
+    <mapper resource="bitcamp/java110/cms/mapper/TeacherDao.xml"/>
+    <mapper resource="bitcamp/java110/cms/mapper/StudentDao.xml"/>
     <mapper resource="bitcamp/java110/cms/mapper/ManagerDao.xml"/>
+    <mapper resource="bitcamp/java110/cms/mapper/MemberDao.xml"/>
+    <mapper resource="bitcamp/java110/cms/mapper/PhotoDao.xml"/>
   </mappers>
 </configuration>
 

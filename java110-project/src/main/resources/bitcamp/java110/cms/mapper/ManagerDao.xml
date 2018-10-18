@@ -11,22 +11,63 @@
         <result column="email"  property="email"/>
         <result column="tel"    property="tel"/>
         <result column="posi"   property="position"/>
+        <result column="photo"   property="photo"/>
     </resultMap>
 
+    <sql id="select1">
+    select
+        m.mno,
+        m.name, 
+        m.email, 
+        m.tel, 
+        mr.posi,
+        mp.photo
+    from
+        p1_mgr mr 
+        inner join p1_memb m on mr.mrno = m.mno
+        left outer join p1_memb_phot mp on mr.mrno = mp.mno
+    </sql>
+
     <select id="findAll" resultMap="managerMap" parameterType="map">
-        select
-            m.mno,
-            m.name, 
-            m.email, 
-            m.tel,
-            mr.posi 
-        from 
-            p1_mgr mr 
-            inner join p1_memb m on mr.mrno = m.mno
-        limit #{rowNo}, #{size} 
-         
+    select
+        m.mno,
+        m.name, 
+        m.email, 
+        m.tel,
+        mr.posi 
+    from 
+        p1_mgr mr 
+        inner join p1_memb m on mr.mrno = m.mno
+    limit #{rowNo}, #{size} 
+     
     </select>
   
+  <select id="findByNo" resultMap="managerMap" parameterType="int">
+    <include refid="select1"></include>
+    where
+        m.mno=#{value}
+  </select>
+  
+  <select id="findByEmailPassword" resultMap="managerMap" parameterType="map">
+    <include refid="select1"></include>
+    where
+        m.email=#{email} and m.pwd=password(#{password})
+  
+  </select>
+  
+  <select id="findByEmail" resultMap="managerMap" parameterType="String">
+    <include refid="select1"></include>
+    where
+        m.email=#{value}
+  </select>
+  
+  <insert id="insert" parameterType="manager">
+    insert into p1_mgr(mrno,posi) values(#{no},#{position})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from p1_mgr where mrno=#{no}
+  </delete>
 </mapper>
 
 
