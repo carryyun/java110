@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.ApplicationContext;
+
 import bitcamp.java110.cms.domain.Member;
 import bitcamp.java110.cms.service.AuthService;
 
@@ -54,9 +56,11 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(cookie);
         }
         
-        AuthService authService = 
-                (AuthService)this.getServletContext()
-                                 .getAttribute("authService");
+        ApplicationContext ctx =
+                (ApplicationContext) this.getServletContext()
+                                         .getAttribute("iocContainer");
+        
+        AuthService authService = ctx.getBean(AuthService.class);
         
         Member loginUser = authService.getMember(email, password, type);
         
