@@ -12,7 +12,7 @@
                 <value>유관순</value>
                 <value>홍길동</value>
             </list>
-        </property>
+        </property>"src/main/java/ex08/app-context-3.xml"
     </bean>
     
     <bean id="cd2" class="ex05.CD">

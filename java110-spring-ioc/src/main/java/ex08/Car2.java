@@ -1,38 +1,42 @@
-package ex05;
+
+
+package ex08;
 
 import java.sql.Date;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
 
-public class Car {
+import org.springframework.beans.factory.annotation.Autowired;
+// @Autowired 사용법
+// 1) setter에 붙이기
+// 2) field에 붙이기
+//    - setter가 없어도 된다.
+//    - 
+public class Car2 {
     private int no;
     private String model;
     private String maker;
     private int cc;
     private Date createdDate;
-    private Engine engine;
-    private CD[] cds;
-    private Set<Tire> tires;
-    private Map<String,Object> options;
     
-    public Car() {
+    @Autowired(required=false)
+    private Engine engine;
+    
+    public Car2() {
         System.out.println("Car() 호출됨!");
     }
     
-    public Car(String model, int cc) {
+    public Car2(String model, int cc) {
         this.model = model;
         this.cc = cc;
         System.out.println("Car(String,int) 호출됨!");
     }
     
-    public Car(int cc, String maker) {
+    public Car2(int cc, String maker) {
         this.maker = maker;
         this.cc = cc;
         System.out.println("Car(int,String) 호출됨!");
     }
     
-    public Car(String model, int cc, Engine engine) {
+    public Car2(String model, int cc, Engine engine) {
         this.model = model;
         this.cc = cc;
         this.engine = engine;
@@ -44,7 +48,6 @@ public class Car {
     }
 
     public void setNo(int no) {
-//        System.out.println(this.getClass().getName());
         this.no = no;
     }
 
@@ -53,7 +56,6 @@ public class Car {
     }
 
     public void setModel(String model) {
-//        System.out.println(this.getClass().getName());
         this.model = model;
     }
 
@@ -84,41 +86,18 @@ public class Car {
     public Engine getEngine() {
         return engine;
     }
-
+    //@Autowired // 해당 의존 객체가 없으면 스프링 IoC 컨테이너는 예외를 발생시킨다.
+    @Autowired(required=false)
     public void setEngine(Engine engine) {
         this.engine = engine;
-    }
-
-    public CD[] getCds() {
-        return cds;
-    }
-
-    public void setCds(CD[] cds) {
-        this.cds = cds;
-    }
-
-    public Set<Tire> getTires() {
-        return tires;
-    }
-
-    public void setTires(Set<Tire> tires) {
-        this.tires = tires;
-    }
-
-    public Map<String, Object> getOptions() {
-        return options;
-    }
-
-    public void setOptions(Map<String, Object> options) {
-        this.options = options;
     }
 
     @Override
     public String toString() {
         return "Car [no=" + no + ", model=" + model + ", maker=" + maker + ", cc=" + cc + ", createdDate=" + createdDate
-                + ", engine=" + engine + ", cds=" + Arrays.toString(cds) + ", tires=" + tires + ", options=" + options
-                + "]";
+                + ", engine=" + engine + "]";
     }
+
     
     
     
