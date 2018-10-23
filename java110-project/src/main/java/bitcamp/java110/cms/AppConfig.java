@@ -1,6 +1,5 @@
 package bitcamp.java110.cms;
 
-import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -21,10 +20,12 @@ import org.springframework.core.env.Environment;
 @MapperScan("bitcamp.java110.cms.dao")
 public class AppConfig {
     
-    public static ServletContext sc;
-    
     @Autowired
     Environment env;
+    
+    public AppConfig() {
+        System.out.println("AppConfig() 호출됨");
+    }
     
     @Bean(destroyMethod="close")
     public DataSource dataSource() {
@@ -67,11 +68,6 @@ public class AppConfig {
         }
     }
     
-    @Bean
-    public ServletContext servletContext() {
-        return sc;
-    }
-
 /*
     public static void main(String[] args) {
         

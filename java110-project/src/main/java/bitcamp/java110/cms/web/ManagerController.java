@@ -44,7 +44,7 @@ public class ManagerController {
     
     @RequestMapping("/manager/detail")
     public String detail(
-            @RequestParam(value="no") int no,
+            int no,
             HttpServletRequest request) {
         
         Manager m = managerService.get(no);
@@ -77,8 +77,7 @@ public class ManagerController {
     }
     
     @RequestMapping("/manager/delete")
-    public String delete(
-            @RequestParam("no") int no) throws Exception {
+    public String delete( int no ) throws Exception {
         
         managerService.delete(no);
         return "redirect:list";

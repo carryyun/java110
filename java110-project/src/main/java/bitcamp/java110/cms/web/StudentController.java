@@ -43,7 +43,7 @@ public class StudentController {
 
     @RequestMapping("/student/detail")
     public String detail(
-            @RequestParam(value="no") int no,
+            int no,
             HttpServletRequest request) {
 
         Student s = studentService.get(no);
@@ -75,8 +75,7 @@ public class StudentController {
     }
 
     @RequestMapping("/student/delete")
-    public String delete(
-            @RequestParam("no") int no) throws Exception {
+    public String delete(int no) throws Exception {
 
         studentService.delete(no);
         return "redirect:list";

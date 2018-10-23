@@ -20,6 +20,10 @@ public class AuthController {
     
     @RequestMapping("/auth/login")
     public String login(
+            String type,
+            String email,
+            String password,
+            String save,
             HttpServletRequest request, 
             HttpServletResponse response,
             HttpSession session) {
@@ -27,11 +31,6 @@ public class AuthController {
         if (request.getMethod().equals("GET")) {
             return  "/auth/form.jsp";
         }
-        
-        String type = request.getParameter("type");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String save = request.getParameter("save");
         
         if (save != null) {// 이메일 저장하기를 체크했다면,
             Cookie cookie = new Cookie("email", email);
