@@ -1,5 +1,143 @@
 # java110-project
 
+## java110-project (tag: v6.6)
+
+- 요청 처리 메서드에서 클라이언트가 보낸 값 바로 받기
+    - @RequestParam 애노테이션으로 클라이언트가 보낸 값 바로 받기
+- 작업
+    - @RequestParam 애노테이션 정의
+    - 프론트 컨트롤러(DispatcherServlet) 변경한다.
+    - 각 페이지 컨트롤로의 메서드도 변경한다.
+
+## v6.5
+
+- 요청 처리 메서드의 파라미터 값 처리를 자동화하기
+    - 프론트 컨트롤러가 페이지 컨트롤러의 메서드를 호출할 때 파라미터 정보를 분석하여 그에 맞는 값을 자동으로 전달하게 만든다.
+- 작업
+    - 프론트 컨트롤러(DispatcherServlet) 변경한다.
+    - 각 페이지 컨트롤로의 메서드도 변경한다.
+
+## v6.4
+
+- CRUD 기능을 합쳐 한 개의 페이지 컨트롤러로 만들기
+    - CRUD를 처리하는 각 메서드의 크기가 크기 않다면 관리하기 쉽게 
+      한 개의 클래스로 통합한다.
+- 작업
+    - 매니저 관리, 학생 관리, 강사 관리, 로그인/로그아웃을 각각 한 개의 클래스로 통합한다.
+
+## v6.3
+
+- PageController 인터페이스 대신 애노테이션을 사용하여 호출 규칙을 정의
+    - 인터페이스의 엄격함 대신에 애노테이션의 유연함을 이용
+    - 즉 애노테이션을 이용하면 메서드의 이름을 고정할 필요가 없다.
+- 작업
+    - 요청이 들어왔을 때 호출될 메서드를 지정할 @RequestMapping 애노테이션을 생성한다.
+    - PageController 인터페이스를 제거하는 대신에 메서드에 애노테이션을 붙인다.
+    - 프론트 컨트롤러 변경한다.
+
+## v6.2
+
+- Page Controller를 POJO로 전환
+    - Spring IoC 컨테이너에서 관리할 수 있다.
+    - DispatcherServlet 클래스 변경
+- 작업
+    - 프론트 컨트롤러와 페이지 컨트롤러 사이의 호출 규칙을 PageController로 전환한다.
+    - 페이지 컨트롤러 역할을 수행하는 서블릿을 일반 클래스로 전환한다.
+    - 프론트 컨트롤러 변경한다.
+    
+## v6.1
+
+- Front Controller 도입
+    - Facade 디자인 패턴 적용
+- 작업
+    - 컨트롤러들의 공통 기능을 분리하여 DispatcherServlet에서 처리한다.
+    - 이전 서블릿에서 했던 redirect, include를 프론트 컨트롤러에게 넘긴다.
+
+## v6.0
+
+- Mybatis와 Spring IoC 컨테이너 연동
+- 작업
+    - mybatis-spring 연동 라이브러리 가져오기
+        - mvnrepository.com에서 'mybatis-spring' 검색
+        - build.gradle 에 라이브러리 정보 등록
+        - 'gradle eclipse' 실행
+        - 이클립스 프로젝트 리프래시
+    - mybatis-spring 문서 참고하여 스프링 설정하기
+        - mybatis.org 사이트 => github.com => spring 저장소 => 문서
+        - 즐겨 찾기에 등록
+    - jdbc.properties 파일 로딩
+        - @PropertySource 애노테이션 사용
+    - DataSource 객체 준비
+        - apache common-dbcp 라이브러리 추가
+        - DataSource 객체 생성 메서드 추가
+    - SqlSessionFactory 객체 생성
+        - XML 기반 mybatis 설정을 스프링 Java Config로 대체한다.
+        - mybatis-spring 라이브러리에서 제공하는 SqlSessionFactoryBean 을 사용한다.
+        - 의존 라이브러리 spring-jdbc를 추가해야 한다.
+        
+## v5.9
+
+- Spring IoC 컨테이너 적용
+- 작업
+    - Spring IoC 컨테이너 라이브러리 추가
+    - ContextLoaderListener 변경
+    - Service와 DAO를 Spring IoC 컨테이너에서 관리하도록 변경
+
+## v5.8
+
+- Mybatis에서 자동으로 생성해주는 Mapper(DAO) 객체 사용하기
+- Mybatis에서 트랜잭션 다루기
+- 작업
+    - 기존 DAO 구현체를 모두 제거한다.
+    - Service 객체에 SqlSessionFactory를 주입한다.
+    - Service 객체는 SqlSessionFactory를 통해 DAO를 얻어 쓴다.
+    - insert, delete 메서드에 트랜잭션을 적용한다.
+    - ContextLoaderListener 변경
+
+## v5.7
+
+- Mybatis persistence framework 적용하기
+- 작업
+    - build.gradle에 mybatis 라이브러리 등록
+    - 'gradle eclipse' 실행
+    - 이클립스 프로젝트 리프래시
+    - DAO, Service, Servlet 변경
+    - ContextLoaderListener 변경
+
+## v5.6
+
+- Statement를 PreparedStatement로 변경하기
+    - SQL 삽입 해킹을 방지하기
+- 작업
+    - 로그인 방어막을 뚫기를 통해 보안 문제 확인
+    - DAO의 모든 SQL문을 PreparedStatement로 교체한다.
+
+## v5.5
+
+- 트랜잭션 관리하기
+- 작업
+    - 트랜잭션을 위해 DataSource의 Connection을 관리하는 클래스를 작성한다.
+    - DataSource는 트랜잭션을 사용할 때와 아닐 때를 다룬다.
+    - 서비스 객체에 트랜잭션 관리자를 적용한다.
+
+## java110-project (tag: v5.4)
+
+- Service 컴포넌트 적용
+    - Servlet이나 DAO에 있는 업무 로직을 별도의 클래스로 분리한다.
+    - 고객사 마다 업무 로직을 달리할 수 있도록 구조를 변경한다.
+- 작업
+    - 업무 로직에 대한 규칙을 인터페이스로 정의한다.
+    - 서비스 컴포넌트의 규칙을 준수하는 클래스를 작성한다.
+
+## v5.3
+
+- 파일 업로드 적용
+- 작업
+    - DB 테이블에 사진 파일명을 저장할 컬럼을 추가한다.
+    - DAO 변경
+    - 서블릿 변경
+    - 입력폼 변경
+
 ## v5.2
 
 - JSTL 적용
