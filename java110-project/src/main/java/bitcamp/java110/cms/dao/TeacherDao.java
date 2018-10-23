@@ -11,5 +11,5 @@ public interface TeacherDao {
     Teacher findByEmail(String email);
     Teacher findByNo(int no);
     int delete(int no);
-    Teacher findByEmailPassword(Map<String, Object> params);
+    Teacher findByEmailPassword(Map<String,Object> params);
 }

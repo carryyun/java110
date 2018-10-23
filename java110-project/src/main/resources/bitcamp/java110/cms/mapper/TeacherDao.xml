@@ -12,65 +12,69 @@
         <result column="tel"    property="tel"/>
         <result column="hrpay"   property="pay"/>
         <result column="subj"   property="subjects"/>
-        <result column="photo"   property="photo"/>
     </resultMap>
-
+    
     <sql id="select1">
-    select
-        m.mno,
-        m.name, 
-        m.email, 
-        m.tel, 
-        t.hrpay,
-        t.subj,
-        mp.photo
-    from
-        p1_tchr t 
-        inner join p1_memb m on t.tno = m.mno
-        left outer join p1_memb_phot mp on t.tno = mp.mno
+        select 
+            m.mno,
+            m.name,
+            m.email,
+            m.tel,
+            t.hrpay,
+            t.subj,
+            mp.photo
+        from 
+            p1_tchr t
+            inner join p1_memb m on t.tno = m.mno
+            left outer join p1_memb_phot mp on t.tno = mp.mno
     </sql>
 
     <select id="findAll" resultMap="teacherMap" parameterType="map">
-    select
-        m.mno,
-        m.name, 
-        m.email, 
-        m.tel,
-        t.hrpay, 
-        t.subj
-    from 
-        p1_tchr t 
-        inner join p1_memb m on t.tno = m.mno
-    limit #{rowNo}, #{size} 
-     
+        select
+            m.mno,
+            m.name, 
+            m.email, 
+            m.tel,
+            t.hrpay,
+            t.subj  
+        from 
+            p1_tchr t 
+            inner join p1_memb m on t.tno = m.mno
+        order by 
+            m.name asc
+        limit #{rowNo}, #{size} 
     </select>
-  
-  <select id="findByNo" resultMap="teacherMap" parameterType="int">
-    <include refid="select1"></include>
-    where
-        m.mno=#{value}
-  </select>
-  
-  <select id="findByEmailPassword" resultMap="teacherMap" parameterType="map">
-    <include refid="select1"></include>
-    where
-        m.email=#{email} and m.pwd=password(#{password})
-  
-  </select>
-  
-  <select id="findByEmail" resultMap="teacherMap" parameterType="String">
-    <include refid="select1"></include>
-    where
-        m.email=#{value}
-  </select>
-  
-  <insert id="insert" parameterType="teacher">
-    insert into p1_tchr(tno,hrpay,subj) values(#{no},#{pay},#{subject})
-  </insert>
-  
-  <delete id="delete" parameterType="int">
-    delete from p1_tchr where tno=#{no}
-  </delete>
+
+    <select id="findByEmail" 
+            resultMap="teacherMap" parameterType="string">
+        <include refid="select1"></include>
+        where 
+            m.email=#{value}
+    </select>
+    
+    <select id="findByNo" 
+            resultMap="teacherMap" parameterType="int">
+        <include refid="select1"></include>
+        where 
+            m.mno=#{value}
+    </select>
+    
+    <select id="findByEmailPassword" 
+            resultMap="teacherMap" parameterType="map">
+        <include refid="select1"></include>
+        where
+            m.email=#{email} and m.pwd=password(#{password})
+    </select> 
+    
+    <insert id="insert" parameterType="manager">
+        insert into p1_tchr(tno,hrpay,subj) 
+        values(#{no},#{pay},#{subjects})
+    </insert> 
+    
+    <delete id="delete" parameterType="int">
+        delete from p1_tchr 
+        where tno=#{value}
+    </delete>
 </mapper>
 
 

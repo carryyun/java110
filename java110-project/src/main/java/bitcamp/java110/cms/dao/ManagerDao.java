@@ -11,5 +11,5 @@ public interface ManagerDao {
     Manager findByEmail(String email);
     Manager findByNo(int no);
     int delete(int no);
-    Manager findByEmailPassword(Map<String, Object> params);
+    Manager findByEmailPassword(Map<String,Object> params);
 }
