@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.dao.MemberDao;
@@ -18,6 +20,20 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired MemberDao memberDao;
     @Autowired PhotoDao photoDao;
     @Autowired ManagerDao managerDao;
+    
+    @Transactional(
+            // 트랜잭션 관리자의 이름이 transactionManager 라면
+            // 다음 속성은 생략해도 된다.
+            // transactionManager="transactionManager"
+            
+            //이 메서드를 호출하는 쪽에 이미 트랜잭션이 있으면 그 트랜잭션에 소속되게 하고,
+            //없으면 새 트랙잭션을 만들어서 수행한다.
+            // 기본 값은 Propagation.REQUIRED이다.
+            propagation=Propagation.REQUIRED,
+            
+            // 이 메서드를 실행 중에 Exception 예외가 발생하면 rollback을 실행한다.
+            rollbackFor=Exception.class
+            )
     
     @Override
     public void add(Manager manager) {

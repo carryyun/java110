@@ -29,7 +29,7 @@ public class ManagerController {
     public String list(
             @RequestParam(value="pageNo",defaultValue="1") int pageNo,
             @RequestParam(value="pageSize",defaultValue="3") int pageSize,
-            Map<String, Object> map) {
+            Map<String,Object> map) {
         
         if (pageNo < 1)
             pageNo = 1;
@@ -39,16 +39,17 @@ public class ManagerController {
         
         List<Manager> list = managerService.list(pageNo, pageSize);
         map.put("list", list);
+        
         return "/manager/list.jsp";
     }
     
     @RequestMapping("/manager/detail")
     public String detail(
             int no,
-            HttpServletRequest request) {
+            Map<String,Object> map) {
         
         Manager m = managerService.get(no);
-        request.setAttribute("manager", m);
+        map.put("manager", m);
         return "/manager/detail.jsp";
     }
     
@@ -61,8 +62,6 @@ public class ManagerController {
             return "/manager/form.jsp";
         }
 
-        request.setCharacterEncoding("UTF-8");
-        
         // 사진 데이터 처리
         Part part = request.getPart("file1");
         if (part.getSize() > 0) {
@@ -77,7 +76,7 @@ public class ManagerController {
     }
     
     @RequestMapping("/manager/delete")
-    public String delete( int no ) throws Exception {
+    public String delete(int no) throws Exception {
         
         managerService.delete(no);
         return "redirect:list";

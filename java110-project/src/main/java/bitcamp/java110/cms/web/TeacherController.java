@@ -18,63 +18,62 @@ import bitcamp.java110.cms.service.TeacherService;
 
 @Controller
 public class TeacherController { 
-
+    
     @Autowired
     TeacherService teacherService;
-
+    
     @Autowired
     ServletContext sc;
-
+    
     @RequestMapping("/teacher/list")
     public String list(
-            @RequestParam(value="pageNo", defaultValue="1") int pageNo,
-            @RequestParam(value="pageSize", defaultValue="3") int pageSize,
-            Map<String, Object> map) {
+            @RequestParam(value="pageNo",defaultValue="1") int pageNo,
+            @RequestParam(value="pageSize",defaultValue="3") int pageSize,
+            Map<String,Object> map) {
 
         if (pageNo < 1)
             pageNo = 1;
-
+        
         if (pageSize < 3 || pageSize > 10)
             pageSize = 3;
-
+        
         List<Teacher> list = teacherService.list(pageNo, pageSize);
         map.put("list", list);
+        
         return "/teacher/list.jsp";
     }
-
+    
     @RequestMapping("/teacher/detail")
-    public String detail( int no,
-            HttpServletRequest request) {
+    public String detail(
+            int no,
+            Map<String,Object> map) {
 
         Teacher t = teacherService.get(no);
-        request.setAttribute("teacher", t);
+        map.put("teacher", t);
         return "/teacher/detail.jsp";
     }
-
+    
     @RequestMapping("/teacher/add")
     public String add(
             Teacher teacher,
             HttpServletRequest request) throws Exception {
-
+        
         if (request.getMethod().equals("GET")) {
             return "/teacher/form.jsp";
         }
-
-        request.setCharacterEncoding("UTF-8");
-
+        
         Part part = request.getPart("file1");
         if (part.getSize() > 0) {
             String filename = UUID.randomUUID().toString();
             part.write(sc.getRealPath("/upload/" + filename));
             teacher.setPhoto(filename);
         }
-
+        
         teacherService.add(teacher);
-        request.setAttribute("viewUrl", "redirect:list");
+
         return "redirect:list";
-
     }
-
+    
     @RequestMapping("/teacher/delete")
     public String delete(int no) throws Exception {
 
