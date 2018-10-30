@@ -1,15 +1,13 @@
-
-
 package ex08;
 
 import java.sql.Date;
 
 import javax.annotation.Resource;
-// @Autowired 사용법
-// 1) setter에 붙이기
-// 2) field에 붙이기
-//    - setter가 없어도 된다.
-//    - 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+// @Resource = @Autowired + @Qualifier
 public class Car4 {
     private int no;
     private String model;
@@ -17,7 +15,7 @@ public class Car4 {
     private int cc;
     private Date createdDate;
     
-    @Resource(name="e2")
+    @Resource(name="e2") // => @Autowired @Qualifier("e2")
     private Engine engine;
     
     public Car4() {
@@ -85,9 +83,6 @@ public class Car4 {
     
     public Engine getEngine() {
         return engine;
-    }
-    public void setEngine(Engine engine) {
-        this.engine = engine;
     }
 
     @Override

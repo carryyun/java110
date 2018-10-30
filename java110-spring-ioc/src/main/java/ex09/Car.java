@@ -1,5 +1,3 @@
-
-
 package ex09;
 
 import java.sql.Date;
@@ -14,6 +12,8 @@ public class Car {
     private String maker;
     private int cc;
     private Date createdDate;
+    
+    @Autowired
     private Engine engine;
     
     public Car() {
@@ -82,11 +82,7 @@ public class Car {
     public Engine getEngine() {
         return engine;
     }
-    //@Autowired // 해당 의존 객체가 없으면 스프링 IoC 컨테이너는 예외를 발생시킨다.
-    @Autowired(required=false)
-    public void setEngine(Engine engine) {
-        this.engine = engine;
-    }
+
 
     @Override
     public String toString() {
@@ -94,8 +90,4 @@ public class Car {
                 + ", engine=" + engine + "]";
     }
 
-    
-    
-    
-    
 }

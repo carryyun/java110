@@ -1,15 +1,14 @@
-
-
 package ex08;
 
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 // @Autowired 사용법
 // 1) setter에 붙이기
 // 2) field에 붙이기
 //    - setter가 없어도 된다.
-//    - 
+//
 public class Car2 {
     private int no;
     private String model;
@@ -17,7 +16,7 @@ public class Car2 {
     private int cc;
     private Date createdDate;
     
-    @Autowired(required=false)
+    @Autowired(required=false) 
     private Engine engine;
     
     public Car2() {
@@ -85,11 +84,6 @@ public class Car2 {
     
     public Engine getEngine() {
         return engine;
-    }
-    //@Autowired // 해당 의존 객체가 없으면 스프링 IoC 컨테이너는 예외를 발생시킨다.
-    @Autowired(required=false)
-    public void setEngine(Engine engine) {
-        this.engine = engine;
     }
 
     @Override

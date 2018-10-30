@@ -1,6 +1,6 @@
-// 의존 객체 자동 주입 : @Autowired에서 같은 타입의 객체가 여러 개일 때  II
-// => @Qualifier
-
+// 의존 객체 자동 주입 : @Autowired에서 같은 타입의 객체가 여러 개일 때 II
+// => @Qualifier를 사용하여 객체의 이름을 지정한다.
+//
 package ex08;
 
 import org.springframework.context.ApplicationContext;
@@ -31,7 +31,9 @@ public class Test05 {
         Car3 c1 = (Car3)iocContainer.getBean("c1");
         System.out.println(c1);
         
+        
     }
+
 }
 
 

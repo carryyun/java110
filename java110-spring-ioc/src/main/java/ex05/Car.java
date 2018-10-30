@@ -44,7 +44,7 @@ public class Car {
     }
 
     public void setNo(int no) {
-//        System.out.println(this.getClass().getName());
+        System.out.println("Car.setNo()");
         this.no = no;
     }
 
@@ -53,7 +53,7 @@ public class Car {
     }
 
     public void setModel(String model) {
-//        System.out.println(this.getClass().getName());
+        System.out.println("Car.setModel()");
         this.model = model;
     }
 
@@ -62,6 +62,7 @@ public class Car {
     }
 
     public void setMaker(String maker) {
+        System.out.println("Car.setMaker()");
         this.maker = maker;
     }
 
@@ -70,6 +71,7 @@ public class Car {
     }
 
     public void setCc(int cc) {
+        System.out.println("Car.setCc()");
         this.cc = cc;
     }
 
@@ -78,6 +80,7 @@ public class Car {
     }
 
     public void setCreatedDate(Date createdDate) {
+        System.out.println("Car.setCreatedDate()");
         this.createdDate = createdDate;
     }
     
@@ -86,6 +89,7 @@ public class Car {
     }
 
     public void setEngine(Engine engine) {
+        System.out.println("Car.setEngine()");
         this.engine = engine;
     }
 
@@ -94,6 +98,7 @@ public class Car {
     }
 
     public void setCds(CD[] cds) {
+        System.out.println("Car.setCds()");
         this.cds = cds;
     }
 
@@ -102,6 +107,7 @@ public class Car {
     }
 
     public void setTires(Set<Tire> tires) {
+        System.out.println("Car.setTires()");
         this.tires = tires;
     }
 
@@ -110,6 +116,7 @@ public class Car {
     }
 
     public void setOptions(Map<String, Object> options) {
+        System.out.println("Car.setOptions()");
         this.options = options;
     }
 
@@ -119,6 +126,7 @@ public class Car {
                 + ", engine=" + engine + ", cds=" + Arrays.toString(cds) + ", tires=" + tires + ", options=" + options
                 + "]";
     }
+
     
     
     

@@ -1,20 +1,5 @@
-// 커스텀 에디터
-// => 스프링 IoC 컨테이너가 객체를 만드릭 위해 생성자를 호출할 때
-//    또는 프로퍼티 값을 절정하기 위해 setter를 호출할 때,
-//    XML 설정 파일에 지정된 물자열을 해당 파라미터 타입에 맞게 자동으로 형변환한다.
-//    단 primitive 타입에 대해서만 자동 형변환한다.
-//    예) String ==> byte/short/int/long/float/double/boolean/char
-//
-// => 그 외 타입에 대해 형변환 하려면 별도의 변환기를 장착해야 한다.
-//    그 별도의 값 변환기를 "커스텀 프로퍼티 에디터(custom property editor)"라 부른다.
+// 객체 생성 방법 : 공장을 통해 객체를 생성하기
 // 
-// 커스텀 프로퍼티 에디터 만들기
-// => java.beans.PropertyEditor 인터페이스를 구현한다.
-//    - 구현할 메서드가 너무 많기 때문에 보통 직접 구현하기 보다는
-//      이 인터페이스를 미리 구현한 클래스(PropertyEditorSupport)를 상속 받아 만든다.
-// => java.beans.PropertyEditorSupport 크래스를 상속 받는다
-//    -이 클래스를 상속 받아서 setAsText(String) 메서드를 오버라이딩
-//    - setAsText() 메서드
 package ex06;
 
 import org.springframework.context.ApplicationContext;

@@ -1,16 +1,11 @@
-
-
 package ex08;
 
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-// @Autowired 사용법
-// 1) setter에 붙이기
-// 2) field에 붙이기
-//    - setter가 없어도 된다.
-//    - 
+
+// @Qualifier 사용
 public class Car3 {
     private int no;
     private String model;
@@ -87,9 +82,6 @@ public class Car3 {
     
     public Engine getEngine() {
         return engine;
-    }
-    public void setEngine(Engine engine) {
-        this.engine = engine;
     }
 
     @Override

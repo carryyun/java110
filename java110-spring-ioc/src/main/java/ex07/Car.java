@@ -38,6 +38,7 @@ public class Car {
     }
 
     public void setNo(int no) {
+        System.out.println("Car.setNo() 호출됨!");
         this.no = no;
     }
 
@@ -46,6 +47,7 @@ public class Car {
     }
 
     public void setModel(String model) {
+        System.out.println("Car.setModel() 호출됨!");
         this.model = model;
     }
 
@@ -54,6 +56,7 @@ public class Car {
     }
 
     public void setMaker(String maker) {
+        System.out.println("Car.setMaker() 호출됨!");
         this.maker = maker;
     }
 
@@ -62,6 +65,7 @@ public class Car {
     }
 
     public void setCc(int cc) {
+        System.out.println("Car.setCc() 호출됨!");
         this.cc = cc;
     }
 
@@ -70,7 +74,7 @@ public class Car {
     }
 
     public void setCreatedDate(Date createdDate) {
-        System.out.println("Car.setCreateDate() 호출됨");
+        System.out.println("Car.setCreatedDate() 호출됨!");
         this.createdDate = createdDate;
     }
     
@@ -79,6 +83,7 @@ public class Car {
     }
 
     public void setEngine(Engine engine) {
+        System.out.println("Car.setEngine() 호출됨!");
         this.engine = engine;
     }
 

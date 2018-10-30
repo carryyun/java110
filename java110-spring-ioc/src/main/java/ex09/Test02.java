@@ -1,22 +1,18 @@
-// Java Config
-// => XML로 설정하지 않고 자바클래스에서 애노테이션으로 설정하는 것을 말한다.
-// => 요즘 많이 사용하고 있는 SpringBoot의 기본 설정 방법이다.
+// 의존 객체 자동 주입 : 생성자
+// => 생성자가 한 개만 있을 경우 파라미터에 들어갈 값을 자동으로 주입한다.
 // 
-
+//
 package ex09;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import ex02.AppConfig;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test02 {
 
     public static void main(String[] args) {
         
-        // Java Config를 사용할 때는 다음 IoC 컨테이너를 사용한다.
         ApplicationContext iocContainer = 
-                new AnnotationConfigApplicationContext(AppConfig.class);
+                new ClassPathXmlApplicationContext("ex09/app-context-2.xml");
         
         System.out.println("------------------------------");
         
@@ -33,10 +29,12 @@ public class Test02 {
         
         System.out.println("------------------------------");
         
-        Car c1 = (Car)iocContainer.getBean("c1");
+        Car3 c1 = (Car3)iocContainer.getBean(Car3.class);
         System.out.println(c1);
         
+        
     }
+
 }
 
 
