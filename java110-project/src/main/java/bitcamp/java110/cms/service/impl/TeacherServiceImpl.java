@@ -58,7 +58,8 @@ public class TeacherServiceImpl implements TeacherService {
         }
         photoDao.delete(no);
         memberDao.delete(no);
-    }
+    } 
+    //.
 }
 
 
